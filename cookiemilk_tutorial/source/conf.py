@@ -14,8 +14,6 @@ release = '0.01'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-myst_enable_extensions = ["colon_fence"]
-
 extensions = ["myst_parser"]
 
 source_suffix = {
