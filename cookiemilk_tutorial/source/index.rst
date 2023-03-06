@@ -3,9 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+Welcome to use cookiemilk! 
 =================================
-.. 这部分的含义是，我们增加一个页面。这个页面的侧边目录显示为Contents
-.. 然后其内容是根据Intro.md来决定的
 
 .. toctree::
    :maxdepth: 2
