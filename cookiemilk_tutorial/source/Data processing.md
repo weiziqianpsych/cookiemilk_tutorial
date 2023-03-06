@@ -8,7 +8,7 @@
 Calculate the PFNet of a given graph. Note: This function is called by cmap2graph() and text2graph().
 
 
-## Calc_surface_matching()
+## calc_surface_matching()
 
 `calc_surface_matching(graph1, graph2)`
     
