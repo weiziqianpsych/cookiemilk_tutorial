@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A brief tutorial of cookiemilk &mdash; cookiemilk 0.01 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data arrangement" href="Data%20arrangement.html" />
+    <link rel="prev" title="Introduction" href="Introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cookiemilk
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">A brief tutorial of cookiemilk</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quickstart">Quickstart</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-load-data">Step 1: load data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-do-some-calculations">Step 2: Do some calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-visualization">Step 3: Visualization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Data%20arrangement.html">Data arrangement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Data%20processing.html">Data processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Visualization.html">Visualization</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cookiemilk</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">A brief tutorial of cookiemilk</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/A brief tutorial of cookiemilk.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="a-brief-tutorial-of-cookiemilk">
+<h1>A brief tutorial of cookiemilk<a class="headerlink" href="#a-brief-tutorial-of-cookiemilk" title="Permalink to this heading"></a></h1>
+<section id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading"></a></h2>
+<section id="step-1-load-data">
+<h3>Step 1: load data<a class="headerlink" href="#step-1-load-data" title="Permalink to this heading"></a></h3>
+<p>For concept map data in proposition format, it should be arranged in a way like this:</p>
+<p>beeswax	minerals
+bees	figure 8
+nectar	bees
+water	beeswax
+……</p>
+<p>Use cmap2graph to load a concept map data of propositions format (i.e., pairs), and convert it into a networkx graph</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bees_student</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">cmap2graph</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s1">&#39;bees_student_cmap_en.txt&#39;</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;pairs&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For text data, we can load it from a string object directly. Here we use a document derived from the PISA reading test, the title of this document is <em>Collecting Nectar</em>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Bees make honey to survive. It is their only essential food. If there are 60,000 bees in a hive about one  third of them will be involved in gathering nectar which is then made into honey by the house bees. A small number of bees work as foragers or searchers. They find a source of nectar, then return to the hive  to tell the other bees where it is.  Foragers let the other bees know where the source of the nectar is by performing a dance which gives  information about the direction and the distance the bees will need to fly. During this dance the bee  shakes her abdomen from side to side while running in circles in the shape of a figure 8. The dance  follows the pattern shown on the following diagram. The diagram shows a bee dancing inside the hive on the vertical face of the honeycomb. If the middle  part of the figure 8 points straight up it means that bees can find the food if they fly straight towards the  sun. If the middle part of the figure 8 points to the right, the food is to the right of the sun.&quot;</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;honeycomb&#39;</span><span class="p">,</span> <span class="s1">&#39;hive&#39;</span><span class="p">)</span>  <span class="c1"># replace synonym: honeycomb --&gt; hive</span>
+
+<span class="n">keyterms</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;beeswax&#39;</span><span class="p">,</span> <span class="s1">&#39;sun&#39;</span><span class="p">,</span> <span class="s1">&#39;nectar&#39;</span><span class="p">,</span> <span class="s1">&#39;house bees&#39;</span><span class="p">,</span> <span class="s1">&#39;water&#39;</span><span class="p">,</span> <span class="s1">&#39;distance&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;hive&#39;</span><span class="p">,</span> <span class="s1">&#39;shake&#39;</span><span class="p">,</span> <span class="s1">&#39;honey&#39;</span><span class="p">,</span> <span class="s1">&#39;abdomen&#39;</span><span class="p">,</span> <span class="s1">&#39;figure 8&#39;</span><span class="p">,</span> <span class="s1">&#39;minerals&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;bees&#39;</span><span class="p">,</span> <span class="s1">&#39;evaporation&#39;</span><span class="p">,</span> <span class="s1">&#39;dry&#39;</span><span class="p">,</span> <span class="s1">&#39;fruit trees&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Now we can convert it into a networkx graph by using <code class="docutils literal notranslate"><span class="pre">text2graph</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bee_text</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">text2graph</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">keyterms</span><span class="p">,</span> <span class="n">read_from_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can do the same thing for a student’s summary of the text.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">text_student</span> <span class="o">=</span> <span class="s1">&#39;Bees make honey to survive. It is their only essential food. If there are 60,000 bees in a hive about one third of them will be involved in gathering nectar which is then made into honey by the house bees. A small number of bees work as foragers or searchers. They find a source of nectar, then return to the hive to tell the other bees where it is. Foragers let the other bees know where the source of the nectar is by performing a dance which gives information about the direction and the distance the bees will need to fly. During this dance the bee shakes her abdomen from side to side while running in circles in the shape of a figure 8. . If the middle part of the figure 8 points straight up it means that bees can find the food if they fly straight towards the sun. If the middle part of the figure 8 points to the right, the food is to the right of the sun. The distance of the food from the hive is indicated by the length of time that the bee shakes her abdomen. If the food is quite near the bee shakes her abdomen for a short time. If it is a long way away she shakes her abdomen for a long time. When the bees arrive at the hive carrying nectar they give this to the house bees. The house bees move the nectar around with their mandibles, exposing it to the warm dry air of the hive. When it is first gathered the nectar contains sugar and minerals mixed with about 80% water. After ten to twenty minutes, when much of the excess water has evaporated, the house bees put the nectar in a cell in the honeycomb where evaporation continues. After three days, the honey in the cells contains about 20% water. At this stage, the bees cover the cells with lids which they make out of beeswax. At any one time the bees in a hive usually gather nectar from the same type of blossom and from the same area. Some of the main sources of nectar are fruit trees, clover and flowering trees. &#39;</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;honeycomb&#39;</span><span class="p">,</span> <span class="s1">&#39;hive&#39;</span><span class="p">)</span>  <span class="c1"># replace synonym: honeycomb --&gt; hive</span>
+
+<span class="n">keyterms</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;beeswax&#39;</span><span class="p">,</span> <span class="s1">&#39;sun&#39;</span><span class="p">,</span> <span class="s1">&#39;nectar&#39;</span><span class="p">,</span> <span class="s1">&#39;house bees&#39;</span><span class="p">,</span> <span class="s1">&#39;water&#39;</span><span class="p">,</span> <span class="s1">&#39;distance&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;hive&#39;</span><span class="p">,</span> <span class="s1">&#39;shake&#39;</span><span class="p">,</span> <span class="s1">&#39;honey&#39;</span><span class="p">,</span> <span class="s1">&#39;abdomen&#39;</span><span class="p">,</span> <span class="s1">&#39;figure 8&#39;</span><span class="p">,</span> <span class="s1">&#39;minerals&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;bees&#39;</span><span class="p">,</span> <span class="s1">&#39;evaporation&#39;</span><span class="p">,</span> <span class="s1">&#39;dry&#39;</span><span class="p">,</span> <span class="s1">&#39;fruit trees&#39;</span><span class="p">]</span>
+
+<span class="n">bee_student</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">text2graph</span><span class="p">(</span><span class="n">text_student</span><span class="p">,</span> <span class="n">keyterms</span><span class="p">,</span> <span class="n">read_from_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And we can also import a concept map data, for example, from a file like this.
+<img alt="img1" src="_images/cmap_file.png" /></p>
+<p>Here is the codes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bee_cmap</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">cmap2graph</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;.../bee_student_cmap_en.txt&#39;</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;pair&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="step-2-do-some-calculations">
+<h3>Step 2: Do some calculations<a class="headerlink" href="#step-2-do-some-calculations" title="Permalink to this heading"></a></h3>
+<p>For example, we can calculate the propositional similarity between <code class="docutils literal notranslate"><span class="pre">bee_text</span></code> and a student’s summary of the text (let’s call it <code class="docutils literal notranslate"><span class="pre">bee_student</span></code>) by using <code class="docutils literal notranslate"><span class="pre">calc_tversky</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cookiemilk</span><span class="o">.</span><span class="n">calc_tversky</span><span class="p">(</span><span class="n">bee_text</span><span class="p">,</span> <span class="n">bee_student</span><span class="p">,</span> <span class="n">comparison</span><span class="o">=</span><span class="s1">&#39;propositional&#39;</span><span class="p">,</span> <span class="n">detailed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And here is what we got.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Calculating Tversky&#39;s similarity in ratio scales
+s = (set1 - set2)/[(set1 - set2) + alpha*(set1 - set2) + beta*(set2 - set1)]
+alpha=0.5, beta=0.5
+for more information, please see references below:
+Tversky, A. (1977). Features of similarity. Psychological Review, 84(4), 327–
+352. https://doi.org/10.1037/0033-295X.84.4.327
+ Pirnay-Dummer P., Ifenthaler D. (2010) Automated Knowledge Visualization and 
+Assessment. In: Ifenthaler D., Pirnay-Dummer P., Seel N. (eds) Computer-Based 
+Diagnostics and Systematic Analysis of Knowledge. Springer, Boston, MA. 
+https://doi.org/10.1007/978-1-4419-5662-0_6
+set1 &amp; set2: [[&#39;honey&#39;, &#39;bees&#39;], [&#39;shake&#39;, &#39;abdomen&#39;], [&#39;hive&#39;, &#39;bees&#39;], [&#39;house bees&#39;, &#39;honey&#39;], [&#39;sun&#39;, &#39;bees&#39;], [&#39;figure 8&#39;, &#39;bees&#39;], [&#39;abdomen&#39;, &#39;figure 8&#39;], [&#39;nectar&#39;, &#39;distance&#39;], [&#39;nectar&#39;, &#39;honey&#39;], [&#39;nectar&#39;, &#39;hive&#39;], [&#39;sun&#39;, &#39;figure 8&#39;], [&#39;house bees&#39;, &#39;bees&#39;], [&#39;distance&#39;, &#39;bees&#39;], [&#39;nectar&#39;, &#39;bees&#39;], [&#39;shake&#39;, &#39;bees&#39;]]
+value of set1 &amp; set2: 15
+set1 - set2: [[&#39;hive&#39;, &#39;figure 8&#39;]]
+value of set1 - set2: 1
+set2 - set1: [[&#39;beeswax&#39;, &#39;bees&#39;], [&#39;nectar&#39;, &#39;minerals&#39;], [&#39;water&#39;, &#39;bees&#39;], [&#39;nectar&#39;, &#39;fruit trees&#39;], [&#39;hive&#39;, &#39;shake&#39;], [&#39;distance&#39;, &#39;hive&#39;], [&#39;water&#39;, &#39;minerals&#39;], [&#39;water&#39;, &#39;honey&#39;], [&#39;nectar&#39;, &#39;house bees&#39;], [&#39;house bees&#39;, &#39;water&#39;], [&#39;sun&#39;, &#39;distance&#39;], [&#39;abdomen&#39;, &#39;bees&#39;], [&#39;honey&#39;, &#39;evaporation&#39;], [&#39;nectar&#39;, &#39;dry&#39;], [&#39;hive&#39;, &#39;dry&#39;]]
+value of set2 - set1: 15
+similarity = 15/(15 + 0.5*1 + 0.5*15)=0.6521739130434783
+</pre></div>
+</div>
+<p>Well, the propositional simialrity between the text and this student’s summary is 0.65.</p>
+</section>
+<section id="step-3-visualization">
+<h3>Step 3: Visualization<a class="headerlink" href="#step-3-visualization" title="Permalink to this heading"></a></h3>
+<p>Use function <code class="docutils literal notranslate"><span class="pre">draw</span></code> to show graph, it would draw graph using <code class="docutils literal notranslate"><span class="pre">D3.js</span></code>, and display it by <code class="docutils literal notranslate"><span class="pre">pywebview</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cookiemilk</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">bee_cmap</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>result:
+<img alt="img1" src="_images/draw.png" /></p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Data%20arrangement.html" class="btn btn-neutral float-right" title="Data arrangement" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, weiziqian.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
