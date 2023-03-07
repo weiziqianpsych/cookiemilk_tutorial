@@ -87,10 +87,11 @@ The result is 0.67.
 `calc_gcent(G, detailed=False)`
 
 ### Description  
-Calculate the Graph Centrality (gcent) of a df_graphs.
+Calculate the Graph Centrality (GC) of a graph.
 
 Please see:
-Clariana, R. B., Rysavy, M. D., & Taricani, E. (2015). Text signals influence team artifacts. Educational Technology Research and Development, 63(1), 35-52.
+
+Clariana, R. B., Rysavy, M. D., & Taricani, E. (2015). Text signals influence team artifacts. *Educational Technology Research and Development*, *63*(1), 35-52.
 
 ### Arguments
 ``G``: a NeyworkX df_graphs.
@@ -165,14 +166,16 @@ The result is 0.50.
 `calc_tversky(graph1, graph2, comparison, alpha=0.5, detailed=False)`
 
 ### Description  
-Calculate Tversky's similarity between df_graphs.
+Calculate Tversky's similarity between two graphs, including conceptual, propositional and semantic similarity.
 
 There are three types of similarities, please see:
+
 Kopainsky, B., Pirnay-Dummer, P., & Alessi, S. M. (2012). Automated assessment of learners' understanding in complex dynamic systems: Automated Assessment of Understanding. System Dynamics Review, 28(2), 131-156.
-    
+
 Pirnay-Dummer P., Ifenthaler D. (2010) Automated Knowledge Visualization and Assessment. In: Ifenthaler D., Pirnay-Dummer P., Seel N. (eds) Computer-Based Diagnostics and Systematic Analysis of Knowledge. Springer, Boston, MA.
 
-Noted that the "Network overlap" described in Clariana's researches equals to the propositional similarity (when alpha=beta=0.5), please see:
+NOTE: the **Network Overlap** described in Clariana's studies equals to the propositional similarity (when `alpha=beta=0.5`, which is the default value of the function `calc_tversky`), please see:
+
 Clariana, R. B., Wallace, P. E., & Godshalk, V. M. (2009). Deriving and measuring group knowledge structure from essays: The effects of anaphoric reference. Educational Technology Research and Development, 57(6), 725-737.
 
 ### Arguments
