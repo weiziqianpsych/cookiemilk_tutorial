@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data processing &mdash; cookiemilk 0.01 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Visualization" href="Visualization.html" />
+    <link rel="prev" title="Data arrangement" href="Data%20arrangement.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cookiemilk
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Data%20arrangement.html">Data arrangement</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pathfinder-network">pathfinder_network()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#description">Description</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#calc-surface-matching">calc_surface_matching()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arguments">Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#value">Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#calc-graphical-matching">calc_graphical_matching()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#calc-gcent">calc_gcent()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#numerical-sim">numerical_sim()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#calc-tversky">calc_tversky()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id14">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Visualization.html">Visualization</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cookiemilk</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Data processing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Data processing.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-processing">
+<h1>Data processing<a class="headerlink" href="#data-processing" title="Permalink to this heading"></a></h1>
+<section id="pathfinder-network">
+<h2>pathfinder_network()<a class="headerlink" href="#pathfinder-network" title="Permalink to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">pathfinder_network(G,</span> <span class="pre">max,</span> <span class="pre">min,</span> <span class="pre">r=np.inf)</span></code></p>
+<section id="description">
+<h3>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h3>
+<p>Calculate the PFNet of a given graph. Note: This function is called by cmap2graph() and text2graph().</p>
+</section>
+</section>
+<section id="calc-surface-matching">
+<h2>calc_surface_matching()<a class="headerlink" href="#calc-surface-matching" title="Permalink to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">calc_surface_matching(graph1,</span> <span class="pre">graph2)</span></code></p>
+<section id="id1">
+<h3>Description<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>Calculate surface matching index between df_graphs.</p>
+<p>Please see:
+Kopainsky, B., Pirnay-Dummer, P., &amp; Alessi, S. M. (2012). Automated assessment of learners’ understanding in complex dynamic systems: Automated Assessment of Understanding. System Dynamics Review, 28(2), 131-156.</p>
+</section>
+<section id="arguments">
+<h3>Arguments<a class="headerlink" href="#arguments" title="Permalink to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">graph1</span></code>: a NetworkX df_graphs.</p>
+<p><code class="docutils literal notranslate"><span class="pre">graph2</span></code>: another Networkx df_graphs.</p>
+</section>
+<section id="value">
+<h3>Value<a class="headerlink" href="#value" title="Permalink to this heading"></a></h3>
+<p>A number of surface matching.</p>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cookiemilk</span>
+
+<span class="c1"># import a graph</span>
+<span class="n">my_cmap1</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]]</span>
+<span class="n">my_data1</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">cmap2graph</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">my_cmap1</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;pair&#39;</span><span class="p">,</span> <span class="n">read_from_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># import another graph</span>
+<span class="n">my_cmap2</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]]</span>
+<span class="n">my_data2</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">cmap2graph</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">my_cmap2</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;pair&#39;</span><span class="p">,</span> <span class="n">read_from_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># calculation</span>
+<span class="n">my_result</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">calc_surface_matching</span><span class="p">(</span><span class="n">my_data1</span><span class="p">,</span> <span class="n">my_data2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The result is 0.75.</p>
+</section>
+</section>
+<section id="calc-graphical-matching">
+<h2>calc_graphical_matching()<a class="headerlink" href="#calc-graphical-matching" title="Permalink to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">calc_graphical_matching(graph1,</span> <span class="pre">graph2)</span></code></p>
+<section id="id2">
+<h3>Description<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<p>Calculate graphical matching index between df_graphs.</p>
+<p>Please see:
+Kopainsky, B., Pirnay-Dummer, P., &amp; Alessi, S. M. (2012). Automated assessment of learners’ understanding in complex dynamic systems: Automated Assessment of Understanding. System Dynamics Review, 28(2), 131-156.</p>
+</section>
+<section id="id3">
+<h3>Arguments<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">graph1</span></code>: a NetworkX df_graphs.</p>
+<p><code class="docutils literal notranslate"><span class="pre">graph2</span></code>: another Networkx df_graphs.</p>
+</section>
+<section id="id4">
+<h3>Value<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<p>A number of graphical matching.</p>
+</section>
+<section id="id5">
+<h3>Examples<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cookiemilk</span>
+
+<span class="c1"># import a graph</span>
+<span class="n">my_cmap1</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]]</span>
+<span class="n">my_data1</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">cmap2graph</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">my_cmap1</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;pair&#39;</span><span class="p">,</span> <span class="n">read_from_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># import another graph</span>
+<span class="n">my_cmap2</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]]</span>
+<span class="n">my_data2</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">cmap2graph</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">my_cmap2</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;pair&#39;</span><span class="p">,</span> <span class="n">read_from_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># calculation</span>
+<span class="n">my_result</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">calc_graphical_matching</span><span class="p">(</span><span class="n">my_data1</span><span class="p">,</span> <span class="n">my_data2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The result is 0.67.</p>
+</section>
+</section>
+<section id="calc-gcent">
+<h2>calc_gcent()<a class="headerlink" href="#calc-gcent" title="Permalink to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">calc_gcent(G,</span> <span class="pre">detailed=False)</span></code></p>
+<section id="id6">
+<h3>Description<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<p>Calculate the Graph Centrality (GC) of a graph.</p>
+<p>Please see:</p>
+<p>Clariana, R. B., Rysavy, M. D., &amp; Taricani, E. (2015). Text signals influence team artifacts. <em>Educational Technology Research and Development</em>, <em>63</em>(1), 35-52.</p>
+</section>
+<section id="id7">
+<h3>Arguments<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">G</span></code>: a NeyworkX df_graphs.</p>
+<p><code class="docutils literal notranslate"><span class="pre">detailed</span></code>: show detailed information of calculation or not. Default is False.</p>
+</section>
+<section id="id8">
+<h3>Value<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h3>
+<p>A number of gcent. And if you set <code class="docutils literal notranslate"><span class="pre">detailed=True</span></code>, additional information will be shown in the console.</p>
+</section>
+<section id="id9">
+<h3>Examples<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cookiemilk</span>
+
+<span class="c1"># import a graph</span>
+<span class="n">my_cmap1</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]]</span>
+<span class="n">my_data1</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">cmap2graph</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">my_cmap1</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;pair&#39;</span><span class="p">,</span> <span class="n">read_from_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># calculation</span>
+<span class="n">my_result</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">calc_gcent</span><span class="p">(</span><span class="n">my_data1</span><span class="p">,</span> <span class="n">detailed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The result shows that the gcent of this graph is 0.67.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adjacency</span> <span class="n">matrix</span><span class="p">:</span>
+ <span class="p">[[</span><span class="mf">0.</span> <span class="mf">1.</span> <span class="mf">1.</span> <span class="mf">1.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.</span> <span class="mf">0.</span> <span class="mf">1.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.</span> <span class="mf">1.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]]</span>
+<span class="n">n</span><span class="p">:</span> <span class="mi">4</span>
+<span class="n">node_degree</span><span class="p">:</span> <span class="p">[</span><span class="mf">3.</span> <span class="mf">2.</span> <span class="mf">2.</span> <span class="mf">1.</span><span class="p">]</span>
+<span class="n">ncent</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.</span>         <span class="mf">0.66666667</span> <span class="mf">0.66666667</span> <span class="mf">0.33333333</span><span class="p">]</span>
+<span class="n">gcent</span><span class="p">:</span> <span class="mf">0.6666666666666667</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="numerical-sim">
+<h2>numerical_sim()<a class="headerlink" href="#numerical-sim" title="Permalink to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">numerical_sim(value1,</span> <span class="pre">value2)</span></code></p>
+<section id="id10">
+<h3>Description<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
+<p>Calculate numerical similarity, see “calc_tversky”.</p>
+</section>
+<section id="id11">
+<h3>Arguments<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">value1</span></code>: a value.</p>
+<p><code class="docutils literal notranslate"><span class="pre">value2</span></code>: another value.</p>
+</section>
+<section id="id12">
+<h3>Value<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h3>
+<p>A number of similarity.</p>
+</section>
+<section id="id13">
+<h3>Examples<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cookiemilk</span>
+
+<span class="c1"># import a graph</span>
+<span class="n">my_cmap1</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]]</span>
+<span class="n">my_data1</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">cmap2graph</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">my_cmap1</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;pair&#39;</span><span class="p">,</span> <span class="n">read_from_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># import another graph</span>
+<span class="n">my_cmap2</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]]</span>
+<span class="n">my_data2</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">cmap2graph</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">my_cmap2</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;pair&#39;</span><span class="p">,</span> <span class="n">read_from_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># calculate gcent</span>
+<span class="n">my_result1</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">calc_gcent</span><span class="p">(</span><span class="n">my_data1</span><span class="p">)</span>
+<span class="n">my_result2</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">calc_gcent</span><span class="p">(</span><span class="n">my_data2</span><span class="p">)</span>
+
+<span class="c1"># calculate gcent similarity</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cookiemilk</span><span class="o">.</span><span class="n">numerical_sim</span><span class="p">(</span><span class="n">my_result1</span><span class="p">,</span> <span class="n">my_result2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The result is 0.50.</p>
+</section>
+</section>
+<section id="calc-tversky">
+<h2>calc_tversky()<a class="headerlink" href="#calc-tversky" title="Permalink to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">calc_tversky(graph1,</span> <span class="pre">graph2,</span> <span class="pre">comparison,</span> <span class="pre">alpha=0.5,</span> <span class="pre">detailed=False)</span></code></p>
+<section id="id14">
+<h3>Description<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h3>
+<p>Calculate Tversky’s similarity between two graphs, including conceptual, propositional and semantic similarity.</p>
+<p>There are three types of similarities, please see:</p>
+<p>Kopainsky, B., Pirnay-Dummer, P., &amp; Alessi, S. M. (2012). Automated assessment of learners’ understanding in complex dynamic systems: Automated Assessment of Understanding. System Dynamics Review, 28(2), 131-156.</p>
+<p>Pirnay-Dummer P., Ifenthaler D. (2010) Automated Knowledge Visualization and Assessment. In: Ifenthaler D., Pirnay-Dummer P., Seel N. (eds) Computer-Based Diagnostics and Systematic Analysis of Knowledge. Springer, Boston, MA.</p>
+<p>NOTE: the <strong>Network Overlap</strong> described in Clariana’s studies equals to the propositional similarity (when <code class="docutils literal notranslate"><span class="pre">alpha=beta=0.5</span></code>, which is the default value of the function <code class="docutils literal notranslate"><span class="pre">calc_tversky</span></code>), please see:</p>
+<p>Clariana, R. B., Wallace, P. E., &amp; Godshalk, V. M. (2009). Deriving and measuring group knowledge structure from essays: The effects of anaphoric reference. Educational Technology Research and Development, 57(6), 725-737.</p>
+</section>
+<section id="id15">
+<h3>Arguments<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">graph1</span></code>: a NetworkX df_graphs.</p>
+<p><code class="docutils literal notranslate"><span class="pre">graph2</span></code>: another Networkx df_graphs.</p>
+<p><code class="docutils literal notranslate"><span class="pre">comparison</span></code>: a string from [‘concept’, ‘propositional’, ‘semantic’] specifying which types of similarities to calculate.</p>
+<p><code class="docutils literal notranslate"><span class="pre">alpha</span></code>: the parameter “alpha” in the Tversky’s similarity.</p>
+<p><code class="docutils literal notranslate"><span class="pre">detailed</span></code>: show detailed information of calculation or not. Default is False.</p>
+</section>
+<section id="id16">
+<h3>Value<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h3>
+<p>A number of Tversky’s similarity.</p>
+</section>
+<section id="id17">
+<h3>Examples<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cookiemilk</span>
+
+<span class="c1"># import a graph</span>
+<span class="n">my_cmap1</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]]</span>
+<span class="n">my_data1</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">cmap2graph</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">my_cmap1</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;pair&#39;</span><span class="p">,</span> <span class="n">read_from_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># import another graph</span>
+<span class="n">my_cmap2</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]]</span>
+<span class="n">my_data2</span> <span class="o">=</span> <span class="n">cookiemilk</span><span class="o">.</span><span class="n">cmap2graph</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">my_cmap2</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;pair&#39;</span><span class="p">,</span> <span class="n">read_from_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># calculate conceptual similarity</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cookiemilk</span><span class="o">.</span><span class="n">calc_tversky</span><span class="p">(</span><span class="n">my_data1</span><span class="p">,</span> <span class="n">my_data2</span><span class="p">,</span> <span class="n">comparison</span><span class="o">=</span><span class="s1">&#39;concept&#39;</span><span class="p">))</span>
+
+<span class="c1"># calculate propositional similarity</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cookiemilk</span><span class="o">.</span><span class="n">calc_tversky</span><span class="p">(</span><span class="n">my_data1</span><span class="p">,</span> <span class="n">my_data2</span><span class="p">,</span> <span class="n">comparison</span><span class="o">=</span><span class="s1">&#39;propositional&#39;</span><span class="p">))</span>
+
+<span class="c1"># calculate semantic similarity</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cookiemilk</span><span class="o">.</span><span class="n">calc_tversky</span><span class="p">(</span><span class="n">my_data1</span><span class="p">,</span> <span class="n">my_data2</span><span class="p">,</span> <span class="n">comparison</span><span class="o">=</span><span class="s1">&#39;semantic&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The similarity is 1.0, 0.57 and 0.57, respectively.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Data%20arrangement.html" class="btn btn-neutral float-left" title="Data arrangement" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Visualization.html" class="btn btn-neutral float-right" title="Visualization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, weiziqian.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
