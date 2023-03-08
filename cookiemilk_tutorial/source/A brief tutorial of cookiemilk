@@ -1,6 +1,6 @@
 # A brief tutorial of cookiemilk
 
-## Step 1: load data
+## Step 1 load data
 
 First of all, import the package.
 ```
@@ -108,7 +108,7 @@ keyterms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
 bee_student = cookiemilk.text2graph(text_student, keyterms, read_from_file=False)
 ```
 
-## Step 2: Do some calculations
+## Step 2 Do some calculations
 For example, we can calculate the propositional similarity between `bee_text` and `bee_student` by using the function `calc_tversky`.
 ```
 cookiemilk.calc_tversky(bee_text, bee_student, comparison='propositional', detailed=True)
@@ -137,7 +137,7 @@ similarity = 15/(15 + 0.5*1 + 0.5*15)=0.6521739130434783
 
 Well, the propositional simialrity between these two graphs is 0.65.
 
-## Step 3: Visualization
+## Step 3 Visualization
 We can use the function `draw` to show a graph, it will draw the graph using `D3.js` and display it by `pywebview`. Let's take a look at `bee_cmap`.
 ```
 cookiemilk.draw(bee_cmap)
