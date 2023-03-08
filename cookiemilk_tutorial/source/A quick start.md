@@ -1,4 +1,4 @@
-# A brief tutorial of cookiemilk
+# A quick start
 
 ## Step 1 load data
 
