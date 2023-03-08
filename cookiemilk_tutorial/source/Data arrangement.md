@@ -61,8 +61,7 @@ Convert a text into a NetworkX graph.
 
 ``keyterms``: a list contained some string variables, each string is one key-term. All key-terms should be written in lower case, but upper case is also acceptable, as long as value of the parameter "as_lower" have been set as False.
 
-``synonym``: a dictionary. Each key is a term form key-terms list, and value can be a list contained synonym(s), e.g., synonym={'a':['a1', 'a2'], 'b':['b1', 'b2']}.
-
+``synonym``: a dictionary object. Each key is a term form `keyterms`, and value can be a list containing synonym(s), e.g., synonym={'a':['a1', 'a2'], 'b':['b1', 'b2']}.
 
 ``read_from_file``: if True, then manipulate the "text" parameter as a string, if False, then manipulate the "text" parameter as a file path.
 
@@ -70,7 +69,7 @@ Convert a text into a NetworkX graph.
 
 ``name``: name of Graph.
 
-``as_lower``: convert every character in the text into lower case. Defalut is False.
+``as_lower``: whether to convert every character in the text to lower case. The default value is 'False'.
 
 ``pfnet``: converts the output into a undirected PFNet if set as True.
 
