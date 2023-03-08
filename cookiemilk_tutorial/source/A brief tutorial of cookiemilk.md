@@ -43,7 +43,15 @@ You can also load a matrix when set the argument `data_type='array'`. For exampl
 
 ![img1](/img/prx.png)
 
-Let's take a look at the information of the data and then adjust the settings. **This is important because inappropriate settings will make your results wrong**. First, this is distance data (which means the values in the matrix represent dissimilarities) rather than data containing 1 or 0 only, so we need to set the argument `pfnet=True` to use the pathfinder algorithm to convert it into a *PFNet* (i.e., an unweighted graph that only contains a few links/edges). When we conduct the pathfinder algorithm, the imported matrix should be a dissimilarities matrix, and this is what this data is, so we do not need to do the matrix transformation (i.e., we set the argument `max=None` and `mix=None`, which are the default settings. Another usage of the argument `max` and `min` in the software JPathfinder defines the range of the values in the matrix, but it's fine to ignore these two arguments because all values will be within the range in most of the situation). Second, we only need to load the matrix, so the information at the beginning of the file is unnecessary. Thus, we need to set the argument `read_from=7` to read the file from the 7th line, which is the start of the matrix. By the way, your data may be a full matrix or a triangle matrix (the example here is a triangle matrix), but you do not need to worry about that, because the function `cmap2graph` will do the matrix transformation automatically when it is necessary.
+Let's take a look at the information of the data and then adjust the settings. **This is important because inappropriate settings will make your results wrong**. 
+
+First, this is distance data (which means the values in the matrix represent dissimilarities) rather than data containing 1 or 0 only, so we need to set the argument `pfnet=True` to use the pathfinder algorithm to convert it into a *PFNet* (i.e., an unweighted graph that only contains a few links/edges). When we conduct the pathfinder algorithm, the imported matrix should be a dissimilarities matrix, and this is what this data is, so we do not need to do the matrix transformation (i.e., we set the argument `max=None` and `mix=None`, which are the default settings. Another usage of the argument `max` and `min` in the software JPathfinder defines the range of the values in the matrix, but it's fine to ignore these two arguments because all values will be within the range in most of the situation). 
+
+Second, we only need to load the matrix, so the information at the beginning of the file is unnecessary. Thus, we need to set the argument `read_from=7` to read the file from the 7th line, which is the start of the matrix. 
+
+Third, do not forget to define a list with terms in an appropriate order (i.e., the variable `keyterms` below).
+
+By the way, your data may be a full matrix or a triangle matrix (the example here is a triangle matrix), but you do not need to worry about that, because the function `cmap2graph` will do the matrix transformation automatically when it is necessary.
 
 Now, here are the codes.
 
