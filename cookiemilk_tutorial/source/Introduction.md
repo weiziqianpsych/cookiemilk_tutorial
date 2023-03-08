@@ -53,3 +53,19 @@ import cookiemilk
 |                  |calc_tversky()            | calculate the Tversky similarity between two graphs        |
 |Visualization     |draw()                    | draw a graph via D3.JS     |
 
+## Citation
+To cite the `cookiemilk` package in publications use:
+
+Wei, Z. (2023). *cookiemilk: An easy-to-use Python package to process knowledge structure data automatically*. South China Normal University, Guangzhou, China. Python package version 0.0.3, [https://pypi.org/project/cookiemilk/](https://pypi.org/project/cookiemilk/).
+
+Corresponding BibTeX entry:
+
+  @Manual{,
+    title = {cookiemilk: An easy-to-used Python package to process knowledge structure data automatically},
+    author = {Wei, Ziqian},
+    organization = {South China Normal University},
+    address = {Guangzhou, China},
+    year = {2023},
+    note = {Python package version 0.0.3},
+    url = {https://pypi.org/project/cookiemilk/},
+  }
