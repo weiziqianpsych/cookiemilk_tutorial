@@ -7,7 +7,8 @@ First of all, import the package.
 import cookiemilk
 ```
 
-For a concept map in the proposition format, we can load it by using the function `cmap2graph` when set the argument `data_type='pairs'`. To do this, the data should be arranged in a way like this:
+### Load a concept map from a file
+For a concept map in the proposition format (i.e., the links/edge are unweighted, which means the values of the links/edges are 1 or 0), we can load it by using the function `cmap2graph` when set the argument `data_type='pairs'`. To do this, the data should be arranged in a way like this:
 
 
 beeswax &emsp; minerals \
@@ -35,10 +36,39 @@ Your can save such kind of contents in a .txt file, like this:
 
 And we can use `cmap2graph` to load and convert it into a NetworkX graph.
 ```
-bees_cmap = cookiemilk.cmap2graph(filepath='bees_student_cmap_en.txt', data_type='pairs')
+bees_cmap = cookiemilk.cmap2graph(file='bees_student_cmap_en.txt', data_type='pairs')
 ```
 
-You can also load a matrix when set the argument `data_type='array'`. For example, here is a matrix data that we want to load. This data was exported from the software JRateDrag, which was used in previous studies for conducting the sorting task.
+### Load a concept map via codes
+
+You can also load data by writing some codes. For example, the concept map data above can be loaded like this.
+
+```
+my_cmap = [['beeswax', 'minerals'],
+           ['bees', 'figure 8'],
+           ['nectar', 'bees'],
+           ['water', 'beeswax'],
+           ['figure 8', 'sun'],
+           ['fruit trees', 'nectar'],
+           ['shake', 'distance'],
+           ['minerals', 'nectar'],
+           ['distance', 'abdomen'],
+           ['evaporation', 'nectar'],
+           ['hive', 'nectar'],
+           ['hive', 'house bees'],
+           ['figure 8', 'shake'],
+           ['water', 'evaporation'],
+           ['dry', 'evaporation'],
+           ['abdomen', 'figure 8'],
+           ['dry', 'house bees'],
+           ['honey', 'house bees']]
+
+my_data = cookiemilk.cmap2graph(file=my_cmap, data_type='pairs', read_from_file=False)
+
+```
+
+### Load a matrix from a file
+You can also load a matrix when set the argument `data_type='array'` (this matrix can be seen as a weighted concept map linking each node together). For example, here is a matrix data that we want to load. This data was exported from the software JRateDrag, which was used in previous studies for conducting the sorting task.
 
 ![img1](/img/prx.png)
 
@@ -73,17 +103,41 @@ We can also take a look at what the PFNet looks like if we do the same thing via
 
 ![img1](/img/triangle_pfnet.png)
 
-For a text, we can load it from a string object directly. Here we use a document derived from the PISA reading test, the title of this document is *Collecting Nectar*.
+### Load a matrix via codes
+Is is possible, but I do not recommend it unless you want to debug or test something.
+
+### Load a text from a file
+
+If you have a file like this, you can load it via the function `text2graph`. Here we use a document derived from the PISA reading test, the title of this document is *Collecting Nectar*.
+
+![img1](/img/bee_text.png)
+
+To do so, you need to provide the key terms in the text by defining a list object in Python (see `keyterms` below). Here are the codes.
+
+```
+keyterms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
+            'hive', 'shake', 'honey', 'abdomen', 'figure 8', 'minerals',
+            'bees', 'evaporation', 'dry', 'fruit trees']
+            
+my_data = cookiemilk.text2graph(text='my_text.txt', keyterms=my_keyterms, as_lower=False)
+```
+
+**NOTE: if the text is written in English, I strongly recommend you to provide terms in the lower case and set the argument `as_lower=True`.** When the argument `as_lower=True` (the default setting), it will convert all of the words in the text to lower case, so that all key terms can be identified correctly. But, if there are key terms in upper case (e.g., abbreviations like 'GPS') and all of the corresponding terms in the text are also written in upper case, you can consider to set the argument `as_lower=False`.
+
+**NOTE: if there are synonyms in the text, try to use the argument `synonym` in the function `text2graph`.** You can find more details about it on the page of this function.
+
+### Load a text via codes
+We can also load this text from a string object in Python directly.
 ```
 text = "Bees make honey to survive. It is their only essential food. If there are 60,000 bees in a hive about one  third of them will be involved in gathering nectar which is then made into honey by the house bees. A small number of bees work as foragers or searchers. They find a source of nectar, then return to the hive  to tell the other bees where it is.  Foragers let the other bees know where the source of the nectar is by performing a dance which gives  information about the direction and the distance the bees will need to fly. During this dance the bee  shakes her abdomen from side to side while running in circles in the shape of a figure 8. The dance  follows the pattern shown on the following diagram. The diagram shows a bee dancing inside the hive on the vertical face of the honeycomb. If the middle  part of the figure 8 points straight up it means that bees can find the food if they fly straight towards the  sun. If the middle part of the figure 8 points to the right, the food is to the right of the sun."
 ```
 
-We can replace the synonyms.
+We can replace the synonyms via the codes below. This is an alternative way to process synonyms if you do not want to use the argument `synonym` in the function `text2graph`.
 ```
 text = text.replace('honeycomb', 'hive')  # replace synonym: honeycomb --> hive
 ```
 
-And we also need to list which concepts were used in the text.
+And we also need to list which key terms were used in the text.
 ```
 keyterms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
             'hive', 'shake', 'honey', 'abdomen', 'figure 8', 'minerals',
