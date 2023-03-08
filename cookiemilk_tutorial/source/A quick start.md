@@ -64,7 +64,6 @@ my_cmap = [['beeswax', 'minerals'],
            ['honey', 'house bees']]
 
 my_data = cookiemilk.cmap2graph(file=my_cmap, data_type='pairs', read_from_file=False)
-
 ```
 
 ### Load a matrix from a file
@@ -119,7 +118,7 @@ keyterms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
             'hive', 'shake', 'honey', 'abdomen', 'figure 8', 'minerals',
             'bees', 'evaporation', 'dry', 'fruit trees']
             
-my_data = cookiemilk.text2graph(text='my_text.txt', keyterms=my_keyterms, as_lower=False)
+my_data = cookiemilk.text2graph(text='my_text.txt', keyterms=my_keyterms, as_lower=True)
 ```
 
 **NOTE: if the text is written in English, I strongly recommend you to provide terms in the lower case and set the argument `as_lower=True`.** When the argument `as_lower=True` (the default setting), it will convert all of the words in the text to lower case, so that all key terms can be identified correctly. But, if there are key terms in upper case (e.g., abbreviations like 'GPS') and all of the corresponding terms in the text are also written in upper case, you can consider to set the argument `as_lower=False`.
