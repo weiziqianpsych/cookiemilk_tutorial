@@ -60,12 +60,12 @@ Wei, Z. (2023). *cookiemilk: An easy-to-use Python package to process knowledge 
 
 Corresponding BibTeX entry:
 
-  @Manual{,
-    title = {cookiemilk: An easy-to-used Python package to process knowledge structure data automatically},
-    author = {Wei, Ziqian},
-    organization = {South China Normal University},
-    address = {Guangzhou, China},
-    year = {2023},
-    note = {Python package version 0.0.3},
-    url = {https://pypi.org/project/cookiemilk/},
+  @Manual{, \
+    title = {cookiemilk: An easy-to-used Python package to process knowledge structure data automatically}, \
+    author = {Wei, Ziqian}, \
+    organization = {South China Normal University}, \
+    address = {Guangzhou, China}, \
+    year = {2023}, \
+    note = {Python package version 0.0.3}, \
+    url = {https://pypi.org/project/cookiemilk/}, \
   }
