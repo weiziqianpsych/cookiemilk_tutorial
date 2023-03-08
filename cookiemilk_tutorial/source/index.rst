@@ -11,7 +11,7 @@ Welcome to use cookiemilk!
    :caption: Contents
    
    Introduction
-   Quickstart
+   A brief tutorial of cookiemilk
    Data arrangement
    Data processing
    Visualization
