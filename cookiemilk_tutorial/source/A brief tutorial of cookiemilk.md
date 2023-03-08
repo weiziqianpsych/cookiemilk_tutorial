@@ -2,7 +2,13 @@
 
 ## Quickstart
 ### Step 1: load data
-For aconcept map in the proposition format, we can load it by using the function `cmap2graph` when set the argument `data_type='pairs'`. To do this, the data should be arranged in a way like this:
+
+First of all, import the package.
+```
+import cookiemilk
+```
+
+For a concept map in the proposition format, we can load it by using the function `cmap2graph` when set the argument `data_type='pairs'`. To do this, the data should be arranged in a way like this:
 
 
 beeswax &emsp; minerals \
@@ -33,7 +39,32 @@ And we can use `cmap2graph` to load and convert it into a NetworkX graph.
 bees_cmap = cookiemilk.cmap2graph(filepath='bees_student_cmap_en.txt', data_type='pairs')
 ```
 
-You can also load a matrix when set the argument `data_type='array'`.
+You can also load a matrix when set the argument `data_type='array'`. For example, here is a matrix data that we want to load. This data was exported from the software JRateDrag, which was used in previous studies for conducting the sorting task.
+
+![img1](/img/prx.png)
+
+Let's take a look at the information of the data and then adjust the settings. **This is important because inappropriate settings will make your results wrong**. First, this is distance data (which means the values in the matrix represent dissimilarities) rather than data containing 1 or 0 only, so we need to set the argument `pfnet=True` to use the pathfinder algorithm to convert it into a *PFNet* (i.e., an unweighted graph that only contains a few links/edges). When we conduct the pathfinder algorithm, the imported matrix should be a dissimilarities matrix, and this is what this data is, so we do not need to do the matrix transformation (i.e., we set the argument `max=None` and `mix=None`, which are the default settings. Another usage of the argument `max` and `min` in the software JPathfinder defines the range of the values in the matrix, but it's fine to ignore these two arguments because all values will be within the range in most of the situation). Second, we only need to load the matrix, so the information at the beginning of the file is unnecessary. Thus, we need to set the argument `read_from=7` to read the file from the 7th line, which is the start of the matrix. By the way, your data may be a full matrix or a triangle matrix (the example here is a triangle matrix), but you do not need to worry about that, because the function `cmap2graph` will do the matrix transformation automatically when it is necessary.
+
+Now, here are the codes.
+
+```
+keyterms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
+            'hive', 'shake', 'honey', 'abdomen', 'figure 8', 'minerals',
+            'bees', 'evaporation', 'dry', 'fruit trees']
+            
+triangle = cookiemilk.cmap2graph(file='/Users/weiziqian/jpf/triangle.prx', data_type='array', keyterms=terms,
+                                 read_from=7, pfnet=True)
+                                 
+cookiemilk.draw(triangle)
+```
+
+And this is what we got.
+
+![img1](/img/triangle_graph.png)
+
+We can also take a look at what the PFNet looks like if we do the same thing via JPathfinder software. You can find that the graph is consistent.
+
+![img1](/img/triangle_pfnet.png)
 
 For a text, we can load it from a string object directly. Here we use a document derived from the PISA reading test, the title of this document is *Collecting Nectar*.
 ```
