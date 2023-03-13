@@ -56,7 +56,7 @@ import cookiemilk
 ## Citation
 To cite the 'cookiemilk' package in publications use:
 
-Wei, Z. (2023). *cookiemilk: An easy-to-use Python package to process knowledge structure data automatically*. South China Normal University, Guangzhou, China. Python package version 0.0.3, [https://pypi.org/project/cookiemilk/](https://pypi.org/project/cookiemilk/).
+Wei, Z. (2023). *cookiemilk: An easy-to-use Python package to process knowledge structure data automatically*. South China Normal University, Guangzhou, China. Python package, [https://pypi.org/project/cookiemilk/](https://pypi.org/project/cookiemilk/).
 
 BibTeX:
 ```
@@ -66,7 +66,7 @@ BibTeX:
     organization = {South China Normal University},
     address = {Guangzhou, China},
     year = {2023},
-    note = {Python package version 0.0.3},
+    note = {Python package},
     url = {https://pypi.org/project/cookiemilk/},
 }
 ```
