@@ -60,3 +60,38 @@ cookiemilk.draw(my_data)
 
 Result:
 ![img1](/img/graph.png)
+
+## average_graph()
+
+`average_graph(data, keyterms, pfnet=True, max=1, min=0.1, r=np.inf, n_core=None)`
+
+### Description    
+Generate an average graph.
+
+### Arguments
+
+`graph`: a NetworkX df_graphs.
+
+`show`: show df_graphs immediately if show=True, or do not show until a draw_html(...show=True) is running. The df_graphs is drawing using d3.js (version 3, i.e., d3v3) and is interactive. You can also modify the style of df_graphs by adding other parameters.
+
+
+
+
+
+### Value
+A list of edges.
+
+### Examples
+```
+import cookiemilk
+
+# import data
+my_cmap = [['A', 'B'], ['A', 'C'], ['A', 'D'], ['B', 'C']]
+my_data = cookiemilk.cmap2graph(file=my_cmap, data_type='pair', read_from_file=False)
+
+# visualization
+cookiemilk.draw(my_data)
+```
+
+Result:
+![img1](/img/graph.png)
