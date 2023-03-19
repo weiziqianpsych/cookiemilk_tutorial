@@ -82,6 +82,8 @@ Generate an average graph.
 
 `r`: A parameter of the pathfinder algorithm. Considering that the mental perception of concept relation is the ordinal scale, we set "r" as infinity, see "Schvaneveldt, R. W., Durso, F. T., & Dearhold, D. W. (1989). Network structures in proximity data. Psychology of Learning and Motivation, 24, 249-284".
 
+`n_core`: an integer representing the number of nodes with the highest node centrality keep in the average graph. The default value is `None`, representing that all key-terms and links are kept.
+
 ### Value
 A NetworkX graph of the average network.
 
