@@ -215,7 +215,7 @@ student2 = cookiemilk.cmap2graph(cmap_student2, data_type='pair', read_from_file
 student3 = cookiemilk.cmap2graph(cmap_student3, data_type='pair', read_from_file=False)
 ```
 
-To use the function `average_graph`, we need to include networks from three students in a list object. And we also need to provide all of the key-terms.
+To use the function `average_graph`, we need to include three students' networks in a list object. And we also need to provide all of the key-terms.
 
 ```
 # arrange data
@@ -224,7 +224,7 @@ data = list([student1, student2, student3])
 keyterms = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 ```
 
-In general, `average_graph` works as the following steps. First, each network will be represented as an n×n matrix (n = the number of key-terms). Each value in the matrix will be 1 or 0, with 1 = 'connected link' and 0 = 'unconnected'. Second, a mean matrix based on all matrices will be defined and converted to a NetworkX graph. Third, the average network will be converted to a PFNet if the argument `PFNet`=TRUE. Finally, if the argument `n_core` is an integer, for example, 4, an average network containing only the four most important key-terms and related links will be returned. If the argument `n_core` is None (i.e., the default value), an average network containing all key-terms and links will be returned.
+In general, `average_graph` works as the following steps. First, each network will be represented as an n×n matrix (n = the number of key-terms). Each value in the matrix will be 1 or 0, with 1 = 'connected' and 0 = 'unconnected'. Second, a mean matrix based on all matrices will be defined and converted to a NetworkX graph. Third, the average network will be converted to a PFNet if the argument `PFNet`=TRUE. Finally, if the argument `n_core` is an integer, for example, 4, an average network containing only the four most important key-terms and related links will be returned. If the argument `n_core` is False (i.e., the default value), an average network containing all key-terms and links will be returned.
 
 Now, I will show you three approaches to generating average networks. NOTE: I only recommend the first and the second approach, and the third approach is just shown for explanations. The first approach (i.e., `average1`) generates an average PFNet containing all key-terms. The second approach (i.e., `average2`) generates an average PFNet **BUT** only containing the four most important key-terms and related links. The third approach (i.e., `average3`) generates an average non-PFNet graph with weighted edges.
 
@@ -273,20 +273,26 @@ plt.show()
 Result:
 ![img1](/img/example_average.png)
 
-As shown in three students' networks (see the top in the above figure), the key-term "B" and "C" were the two most important key-terms in Student1's network, the key-term "F" was the most important in Student2's network, and the key-term "G" was the most important in Student3's network. 
+As shown in three students' networks (see the top in the above figure), the key-term "B" and "C" are the two most important key-terms in Student1's network, the key-term "F" is the most important in Student2's network, and the key-term "G" is the most important in Student3's network. 
 
-The first average network contained all key-terms that appear in students' networks (i.e., from "A" to "G", see the bottom-left of the above figure). However, this approach might result in a large network if the dataset is large and different students used different key-terms. One of the possible solutions is to retain only the most important nodes and related links in the average network. For doing this, we needed to check the node centrality first.
+The first average network contains all key-terms that appear in three students' networks (i.e., from "A" to "G", see the bottom-left of the above figure). However, this approach may result in a large network if the dataset is large and different students used different key-terms. One of the possible solutions is to retain only the most important key-terms and related links in the average network. For doing this, we need to check the node centrality first.
 
 ```
 nx.degree_centrality(average1)
 ```
 
-Here were the results. 
+Here are the results. 
 
 ```
 {'B': 0.5, 'A': 0.3333333333333333, 'C': 0.6666666666666666, 'D': 0.3333333333333333, 'F': 0.5, 'E': 0.16666666666666666, 'G': 0.5}
 ```
 
-We found that "B", "C", "F", and "G" show the highest node centrality, so we could consider retaining only four nodes in the average network. Four was also the number of key-terms in each student's network, so this number seems appropriate in this case. By setting the argument `n_core`=4, we obtained the second average network (see the bottom-middle of the above figure). Note that keeping the size of the average network is important in some cases because some indices such as graph centrality (GC) only can be used to compare networks when the networks are about the same size.
+We find that "B", "C", "F", and "G" show the highest node centrality, so we can consider retaining only four nodes in the average network. Four is also the number of key-terms in each student's network, so this number seems appropriate in this case. By setting the argument `n_core`=4, we obtain the second average network (see the bottom-middle of the above figure). Note that keeping the size of the average network is important in some cases because some indices such as graph centrality (GC) only can be used to compare networks when the networks are about the same size.
 
-The third average network contained most of the information in the mean matrix (see the bottom-middle of the above figure), but it was less interpretable. This is why the argument `pfnet` and `n_core` are important for generating an average network.
+The third average network contains most of the information in the mean matrix (see the bottom-middle of the above figure), but it was less interpretable. This is why the argument `pfnet` and `n_core` are important for generating an average network.
+
+Finally, we can also use the function `draw` to show the average network.
+
+```
+cookiemilk.draw(average1)
+```
