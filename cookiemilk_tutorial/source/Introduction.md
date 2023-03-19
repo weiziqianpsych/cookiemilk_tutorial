@@ -52,6 +52,7 @@ import cookiemilk
 |                  |   numerical_sim()        | calculate the numerical similarity (e.g., GC similarity)  |
 |                  |calc_tversky()            | calculate the Tversky similarity between two graphs        |
 |Visualization     |draw()                    | draw a graph via D3.JS     |
+|                  | average_graph()            | generate an average graph from multiple graphs         |
 
 ## Citation
 To cite the 'cookiemilk' package in publications use:
