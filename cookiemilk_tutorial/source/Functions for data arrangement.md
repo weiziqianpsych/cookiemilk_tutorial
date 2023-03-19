@@ -1,11 +1,15 @@
-# Data arrangement
+# Functions for data arrangement
 
 ## cmap2graph()
 
 `cmap2graph(file, data_type, keyterms=None, read_from_file=True, encoding='utf-8', read_from=0, pfnet=False, max=None, min=None, r=np.inf)`
     
 ### Description    
-Convert a concept map (or a proximity/adjacency matrix) into a NetworkX graph.
+Convert a concept map (or a proximity/adjacency matrix) into a NetworkX graph using the analysis of lexical aggregates (ALA).
+
+Please see:
+
+Clariana, R. B., Wallace, P. E., & Godshalk, V. M. (2009). Deriving and measuring group knowledge structure from essays: The effects of anaphoric reference. Educational Technology Research and Development, 57(6), 725-737.
 
 ### Arguments
 ``file``: A list (see the data type below), or a file path of a .txt document. Theoretically, contents can be written in any language, as long as Python and your computer support it. If you try to open a file, then you might have to set a suitable encoding form, for example, if contents is written in Chinese, the .txt file better save as utf-8 encoding, and should be open as the same encoding too.
@@ -54,7 +58,11 @@ Result:
 `text2graph(text, keyterms, synonym=None, read_from_file=True, name=None, encoding='utf-8', as_lower=True, pfnet=False, max=None, min=None, r=np.inf)`
 
 ### Description 
-Convert a text into a NetworkX graph.
+Convert a text into a NetworkX graph using the analysis of lexical aggregates (ALA).
+
+Please see:
+
+Clariana, R. B., Wallace, P. E., & Godshalk, V. M. (2009). Deriving and measuring group knowledge structure from essays: The effects of anaphoric reference. Educational Technology Research and Development, 57(6), 725-737.
 
 ### Arguments
 ``text``: a string or a file path of a .txt document. Theoretically, contents can be written in any language, as long as Python and your computer support it. If you try to open a file, then you might have to set a suitable encoding form, for example, if contents is written in Chinese, the .txt file better save as utf-8 encoding, and should be open as the same encoding too.
@@ -108,7 +116,7 @@ Result:
 Read contents from a .txt file into a list. Note: This function is called by cmap2graph() and text2graph().
 
 
-## get_data_files_name
+## get_data_files_name()
 
 `get_data_files_name(init_file_path)`
     
