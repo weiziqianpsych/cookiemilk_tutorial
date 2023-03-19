@@ -1,4 +1,4 @@
-# functions for data processing
+# Functions for data processing
 
 ## pathfinder_network()
 
