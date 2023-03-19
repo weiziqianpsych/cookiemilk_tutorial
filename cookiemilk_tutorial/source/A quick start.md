@@ -287,6 +287,6 @@ Here were the results.
 {'B': 0.5, 'A': 0.3333333333333333, 'C': 0.6666666666666666, 'D': 0.3333333333333333, 'F': 0.5, 'E': 0.16666666666666666, 'G': 0.5}
 ```
 
-We found that "B", "C", "F", and "G" show the highest node centrality, so we can consider retaining only four nodes in the average network. Four was also the number of key-terms in each student's network, so this number seems appropriate. By setting the argument `n_core`=4, we obtained the second average network (see the bottom-middle of the above figure). Note that keeping the size of the average network is important in some cases because some indices such as graph centrality (GC) only can be used to compare networks when the networks are about the same size.
+We found that "B", "C", "F", and "G" show the highest node centrality, so we could consider retaining only four nodes in the average network. Four was also the number of key-terms in each student's network, so this number seems appropriate in this case. By setting the argument `n_core`=4, we obtained the second average network (see the bottom-middle of the above figure). Note that keeping the size of the average network is important in some cases because some indices such as graph centrality (GC) only can be used to compare networks when the networks are about the same size.
 
 The third average network contained most of the information in the mean matrix (see the bottom-middle of the above figure), but it was less interpretable. This is why the argument `pfnet` and `n_core` are important for generating an average network.
