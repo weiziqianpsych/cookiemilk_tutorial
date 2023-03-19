@@ -1,4 +1,4 @@
-# Visualization
+# Functions for network visualization
 
 ## draw()
 
