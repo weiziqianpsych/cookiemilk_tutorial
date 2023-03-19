@@ -12,9 +12,9 @@ Welcome to use cookiemilk!
    
    Introduction
    A quick start
-   Data arrangement
-   Data processing
-   Visualization
+   Functions for data arrangement
+   Functions for data processing
+   Functions for network visualization
 
 .. Indices and tables
 .. ==================
