@@ -12,6 +12,7 @@ Welcome to use cookiemilk!
    
    Introduction
    A quick start
+   Advanced tips
    Functions for data arrangement
    Functions for data processing
    Functions for network visualization
