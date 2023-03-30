@@ -2,38 +2,38 @@
 
 ## draw()
 
-`draw(graph, show=True, save=False, filename='filename', encoding='utf-8', canvas_size=(500, 500), node_font='sans-serif', node_fontsize=12, node_fontcolor='crimson', node_fillcolor='#ffebcd', node_size=12, edge_color='#7ab8cc', edge_size=2, edge_distance=100, charge=-300, detailed=False)`
-    
+`draw(graph, show=True, save=False, filename='filename', encoding='utf-8', canvas_size=(500, 500), node_font='sans-serif', node_fontsize=12, node_fontcolor='black', node_fillcolor='lightgrey', node_size=12, edge_color='#7ab8cc', edge_size=2, edge_distance=100, charge=-300, detailed=True)`
+
 ### Description    
-Show and/or save a df_graphs.
+Show and/or save a NetworkX Graph.
 
 Based on d3.js (https://d3js.org/) and pywebview (https://github.com/r0x0r/pywebview).
 
 ### Arguments
 
-`graph`: a NetworkX df_graphs.
+`graph`: A NetworkX graph.
 
-`show`: show df_graphs immediately if show=True, or do not show until a draw_html(...show=True) is running. The df_graphs is drawing using d3.js (version 3, i.e., d3v3) and is interactive. You can also modify the style of df_graphs by adding other parameters.
+`show`: A Boolean value, the default value is True. If show=True, the visualized graph will be shown immediately in a pywebview window. If show=False, the visualized graph will not be shown until a draw(...show=True) is running. The graph is drawn using d3.js (version 3, i.e., d3v3) and is interactive. You can also modify the style of the graph by setting other parameters.
 
-`save`: save the output as an HTML file. The df_graphs being saved is an SVG object in the HTML file. Scalable vector graphic (SVG) is a type of image format that can be opened by browser software such as Chrome, Edge and Firefox, and can be edited by using Adobe Illustrator. Currently, `cookiemilk` can not save a graph as an SVG file directly, but you can extract it from the HTML file.
+`save`: A Boolean, the default value is False. If save=True, the visualized graph will be saved in an HTML file. The visualized graph being saved is an SVG object in the HTML file. Scalable vector graphic (SVG) is a type of image format that can be opened by browser software such as Google Chrome, Microsoft Edge and Firefox, and can be further modified by figure drawing software such as Adobe Illustrator. Currently, `cookiemilk` can not save a graph as an SVG file directly, but you can extract it from the HTML file using some tools such as SVG Crowbar (please see: https://nytimes.github.io/svg-crowbar/).
 
-`filename`: filename of the output HTML file. The default is "filename".
+`filename`: A string specifying the filename of the output HTML file. The default value is "filename", which will result in an HTML file called "filename.HTML".
 
-`encoding`: encoding of the output HTML file. The default is "utf-8".
+`encoding`: A string specifying the encoding standard of the output HTML file. The default is "utf-8".
 
-`canvas_size`: a list or tuple specifying the size of the canvas. The default is (500, 500), which means 500*500 pixels.
+`canvas_size`: A list or tuple object specifying the size of the canvas. The default is (500, 500), which means 500×500 pixels and seems suitable for a graph containing 10-15 key-terms. If your graph is large (e.g., many nodes and edges), please try to set up a large canvas.
 
-`node_font`: a string specifying the font of nodes in the graph. The default is "sans-serif".
+`node_font`: A string specifying the font of nodes in the graph. The default font is "sans-serif".
 
-`node_fontsize`: a number specifying the size of labels in df_nodes. The default is 12.
+`node_fontsize`: A number specifying the size of node labels. The default value is 12.
 
-`node_fontcolor`: a string specifying the colour of labels in nodes. The string can be written in HEX format or just a colour name (as long as d3.js know it). The default is "crimson".
+`node_fontcolor`: A string specifying the colour of node labels. The string can be written in HEX format or just a colour name (as long as it is available in d3.js). The default value is "black".
 
-`node_fillcolor`: a string specifying the colour of nodes. The default is "#ffebcd".
+`node_fillcolor`: A string specifying the colour of nodes. The default value is "lightgrey".
 
-`node_size`: a number specifying the size of nodes in the graphs. The default is 12.
+`node_size`: A number specifying the size of nodes in the graph. The default value is 12.
 
-`edge_color`: a string specifying the colour of edges. The default is "#7ab8cc".
+`edge_color`: A string specifying the colour of edges. The default value is "#7ab8cc".
 
 `edge_size`: a number specifying the width of edges in the graphs. The default is 2.
 
@@ -41,10 +41,10 @@ Based on d3.js (https://d3js.org/) and pywebview (https://github.com/r0x0r/pyweb
 
 `charge`: a number specifying the charge in the df_graphs. The default is -300.
 
-`detailed`: show HTML contents or not. The default is False.
+`detailed`: A boolean, the default value is True. If detailed=True, there will be a printed message shown if the HTML file is saved successfully.
 
 ### Value
-A list object of edges.
+None.
 
 ### Examples
 ```
@@ -54,8 +54,11 @@ import cookiemilk
 my_cmap = [['A', 'B'], ['A', 'C'], ['A', 'D'], ['B', 'C']]
 my_data = cookiemilk.cmap2graph(file=my_cmap, data_type='pair', read_from_file=False)
 
-# visualization
+# show the graph in a pywebview window
 cookiemilk.draw(my_data)
+
+# do not show the graph, but save it in an HTML file
+cookiemilk.draw(my_data, show=False, save=True)
 ```
 
 Result:
@@ -63,26 +66,28 @@ Result:
 
 ## average_graph()
 
-`average_graph(data, keyterms, pfnet=True, max=1, min=0.1, r=np.inf, n_core=None)`
+`average_graph(data, keyterms, pfnet=True, max=1, min=0.1, r=np.inf, n_core=None, detailed=True)`
 
 ### Description    
-Generate an average graph.
+Generate an average graph based on several graphs.
 
 ### Arguments
 
-`data`: a list object containing multiple Networkx graph objects.
+`data`: A list object containing several NetworkX graphs.
 
-`keyterms`: A list object containing some string variables, each string is one key-term.
+`keyterms`: A list object containing some string variables, each string is a key-term used in a graph.
 
-`pfnet`: Whether the data should be converted into an undirected PFNet. The default value is False.
+`pfnet`: A Boolean value specifying if the data should be converted into an undirected PFNet. The default value is True.
 
-`max`: A parameter used to convert the similarity matrix into the dissimilarity matrix if necessary. for example, if each value of the original matrix ranges from 0 to 1, then "max" will be 1 and "min" will be 0.1. If values of both "max" and "min" are None (which is the default value), then the original matrix will be used.
+`max`: A number used to convert the similarity matrix into the dissimilarity matrix if necessary when calculating a PFNet. For example, if each value of the original matrix ranges from 0 to 1, you can set max=1 and min=0.1. If values of both "max" and "min" are None, the original matrix will be used. The default value is 1.
 
-`min`: See "max".
+`min`: A number used when calculating a PFNet. Please see "max". The default value is 0.1.
 
-`r`: A parameter of the pathfinder algorithm. Considering that the mental perception of concept relation is the ordinal scale, we set "r" as infinity, see "Schvaneveldt, R. W., Durso, F. T., & Dearhold, D. W. (1989). Network structures in proximity data. Psychology of Learning and Motivation, 24, 249-284".
+`r`: A number used when calculating a PFNet. Considering that the mental perception of concept relation is in the ordinal scale, the default value of `r` is infinity (i.e., np.inf). Please see "Schvaneveldt, R. W., Durso, F. T., & Dearhold, D. W. (1989). Network structures in proximity data. Psychology of Learning and Motivation, 24, 249-284".
 
-`n_core`: an integer representing the number of nodes with the highest node centrality keep in the average graph. The default value is `None`, representing that all key-terms and links are kept.
+`n_core`: An integer specifying the number of nodes with the highest node centrality keep in the average graph. The default value is None, representing that all key-terms and links will be kept.
+
+`detailed`: A boolean, the default value is True. If detailed=True, there will be a printed message shown an average graph is generated successfully.
 
 ### Value
 A NetworkX graph of the average network.
@@ -113,4 +118,3 @@ average1 = cookiemilk.average_graph(data=data, keyterms=keyterms, n_core=False, 
 # approach 2: an average network containing only four core key-terms (setting n_core=4)
 average2 = cookiemilk.average_graph(data=data, keyterms=keyterms, n_core=4, pfnet=True)
 ```
-
