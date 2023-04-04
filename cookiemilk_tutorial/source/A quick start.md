@@ -63,7 +63,7 @@ my_cmap = [['beeswax', 'minerals'],
            ['dry', 'house bees'],
            ['honey', 'house bees']]
 
-my_data = cookiemilk.cmap2graph(file=my_cmap, data_type='pairs', read_from_file=False)
+student_cmap = cookiemilk.cmap2graph(data=my_cmap, data_type='pair', read_from_file=False)
 ```
 
 ### Load a matrix from a file
@@ -84,11 +84,11 @@ By the way, your data may be a full matrix or a triangle matrix (the example her
 Now, here are the codes.
 
 ```
-keyterms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
+key_terms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
             'hive', 'shake', 'honey', 'abdomen', 'figure 8', 'minerals',
             'bees', 'evaporation', 'dry', 'fruit trees']
             
-triangle = cookiemilk.cmap2graph(file='/Users/weiziqian/jpf/triangle.prx', data_type='array', keyterms=terms,
+triangle = cookiemilk.cmap2graph(file='/Users/weiziqian/jpf/triangle.prx', data_type='array', key_terms=key_terms,
                                  read_from=7, pfnet=True)
                                  
 cookiemilk.draw(triangle)
@@ -111,14 +111,14 @@ If you have a file like this, you can load it via the function `text2graph`. Her
 
 ![img1](/img/bee_text.png)
 
-To do so, you need to provide the key terms in the text by defining a list object in Python (see `keyterms` below). Here are the codes.
+To do so, you need to provide the key terms in the text by defining a list object in Python (see `key_terms` below). Here are the codes.
 
 ```
-keyterms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
+key_terms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
             'hive', 'shake', 'honey', 'abdomen', 'figure 8', 'minerals',
             'bees', 'evaporation', 'dry', 'fruit trees']
             
-my_data = cookiemilk.text2graph(text='bee_text.txt', keyterms=my_keyterms, as_lower=True)
+my_data = cookiemilk.text2graph(text='bee_text.txt', key_terms=key_terms, as_lower=True)
 ```
 
 **NOTE: if the text is written in English, I strongly recommend you to provide terms in lower case and set the argument `as_lower=True`.** When the argument `as_lower=True` (the default setting), it will convert all of the words in the text to lowercase, so that all key terms can be identified correctly. But, if there are key terms in upper case (e.g., abbreviations like 'GPS') and all of the corresponding terms in the text are also written in upper case, you can consider setting the argument `as_lower=False`.
@@ -128,67 +128,46 @@ my_data = cookiemilk.text2graph(text='bee_text.txt', keyterms=my_keyterms, as_lo
 ### Load a text via codes
 We can also load this text from a string object in Python directly.
 ```
-text = "Bees make honey to survive. It is their only essential food. If there are 60,000 bees in a hive about one third of them will be involved in gathering nectar which is then made into honey by the house bees. A small number of bees work as foragers or searchers. They find a source of nectar, then return to the hive to tell the other bees where it is.  Foragers let the other bees know where the source of the nectar is by performing a dance which gives information about the direction and the distance the bees will need to fly. During this dance the bee shakes her abdomen from side to side while running in circles in the shape of a figure 8. The dance follows the pattern shown on the following diagram. The diagram shows a bee dancing inside the hive on the vertical face of the honeycomb. If the middle part of the figure 8 points straight up it means that bees can find the food if they fly straight towards the sun. If the middle part of the figure 8 points to the right, the food is to the right of the sun."
-```
-
-We can replace the synonyms via the codes below. This is an alternative way to process synonyms if you do not want to use the argument `synonym` in the function `text2graph`.
-```
-text = text.replace('honeycomb', 'hive')  # replace synonym: honeycomb --> hive
+text = 'Bees make honey to survive. It is their only essential food. If there are 60,000 bees in a hive about one ' \
+       'third of them will be involved in gathering nectar which is then made into honey by the house bees. A small ' \
+       'number of bees work as foragers or searchers. They find a source of nectar, then return to the hive to tell ' \
+       'the other bees where it is. Foragers let the other bees know where the source of the nectar is by performing ' \
+       'a dance which gives information about the direction and the distance the bees will need to fly. During this ' \
+       'dance the bee shakes her abdomen from side to side while running in circles in the shape of a figure 8. The ' \
+       'dance follows the pattern shown on the following diagram. The diagram shows a bee dancing inside the hive on ' \
+       'the vertical face of the honeycomb. If the middle part of the figure 8 points straight up it means that bees ' \
+       'can find the food if they fly straight towards the sun. If the middle part of the figure 8 points to the ' \
+       'right, the food is to the right of the sun. The distance of the food from the hive is indicated by the length ' \
+       'of time that the bee shakes her abdomen. If the food is quite near the bee shakes her abdomen for a short ' \
+       'time. If it is a long way away she shakes her abdomen for a long time. When the bees arrive at the hive ' \
+       'carrying nectar they give this to the house bees. The house bees move the nectar around with their mandibles, ' \
+       'exposing it to the warm dry air of the hive. When it is first gathered the nectar contains sugar and minerals ' \
+       'mixed with about 80% water. After ten to twenty minutes, when much of the excess water has evaporated, ' \
+       'the house bees put the nectar in a cell in the honeycomb where evaporation continues. After three days, ' \
+       'the honey in the cells contains about 20% water. At this stage, the bees cover the cells with lids which they ' \
+       'make out of beeswax. At any one time the bees in a hive usually gather nectar from the same type of blossom ' \
+       'and from the same area. Some of the main sources of nectar are fruit trees, clover and flowering trees. '
 ```
 
 And we also need to list which key terms were used in the text.
 ```
-keyterms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
+key_terms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
             'hive', 'shake', 'honey', 'abdomen', 'figure 8', 'minerals',
             'bees', 'evaporation', 'dry', 'fruit trees']
 ```
 
 Now we can convert the text into a NetworkX graph by using `text2graph`.
 ```
-bee_text = cookiemilk.text2graph(text, keyterms, read_from_file=False)
-```
-
-Here is another example, we do the same thing for a student's summary of the text.
-```
-text_student = 'Bees make honey to survive. It is their only essential food. If there are 60,000 bees in a hive about one third of them will be involved in gathering nectar which is then made into honey by the house bees. A small number of bees work as foragers or searchers. They find a source of nectar, then return to the hive to tell the other bees where it is. Foragers let the other bees know where the source of the nectar is by performing a dance which gives information about the direction and the distance the bees will need to fly. During this dance the bee shakes her abdomen from side to side while running in circles in the shape of a figure 8. . If the middle part of the figure 8 points straight up it means that bees can find the food if they fly straight towards the sun. If the middle part of the figure 8 points to the right, the food is to the right of the sun. The distance of the food from the hive is indicated by the length of time that the bee shakes her abdomen. If the food is quite near the bee shakes her abdomen for a short time. If it is a long way away she shakes her abdomen for a long time. When the bees arrive at the hive carrying nectar they give this to the house bees. The house bees move the nectar around with their mandibles, exposing it to the warm dry air of the hive. When it is first gathered the nectar contains sugar and minerals mixed with about 80% water. After ten to twenty minutes, when much of the excess water has evaporated, the house bees put the nectar in a cell in the honeycomb where evaporation continues. After three days, the honey in the cells contains about 20% water. At this stage, the bees cover the cells with lids which they make out of beeswax. At any one time the bees in a hive usually gather nectar from the same type of blossom and from the same area. Some of the main sources of nectar are fruit trees, clover and flowering trees. '
-
-text = text.replace('honeycomb', 'hive')  # replace synonym: honeycomb --> hive
-
-keyterms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
-            'hive', 'shake', 'honey', 'abdomen', 'figure 8', 'minerals',
-            'bees', 'evaporation', 'dry', 'fruit trees']
-
-bee_student = cookiemilk.text2graph(text_student, keyterms, read_from_file=False)
+bees_text = cookiemilk.text2graph(data=text, key_terms=key_terms, as_lower=True, read_from_file=False)
 ```
 
 ## Step 2 Do some calculations
-For example, we can calculate the propositional similarity between `bee_text` and `bee_student` by using the function `calc_tversky`.
+For example, we can calculate the propositional similarity between `bees_text` and `bees_student` by using the function `calc_tversky`.
 ```
-cookiemilk.calc_tversky(bee_text, bee_student, comparison='propositional', detailed=True)
-```
-
-And here is what we got.
-```
-Calculating Tversky's similarity in ratio scales
-s = (set1 - set2)/[(set1 - set2) + alpha*(set1 - set2) + beta*(set2 - set1)]
-alpha=0.5, beta=0.5
-for more information, please see the references below:
-Tversky, A. (1977). Features of similarity. Psychological Review, 84(4), 327–
-352. https://doi.org/10.1037/0033-295X.84.4.327
- Pirnay-Dummer P., Ifenthaler D. (2010) Automated Knowledge Visualization and 
-Assessment. In: Ifenthaler D., Pirnay-Dummer P., Seel N. (eds) Computer-Based 
-Diagnostics and Systematic Analysis of Knowledge. Springer, Boston, MA. 
-https://doi.org/10.1007/978-1-4419-5662-0_6
-set1 & set2: [['honey', 'bees'], ['shake', 'abdomen'], ['hive', 'bees'], ['house bees', 'honey'], ['sun', 'bees'], ['figure 8', 'bees'], ['abdomen', 'figure 8'], ['nectar', 'distance'], ['nectar', 'honey'], ['nectar', 'hive'], ['sun', 'figure 8'], ['house bees', 'bees'], ['distance', 'bees'], ['nectar', 'bees'], ['shake', 'bees']]
-value of set1 & set2: 15
-set1 - set2: [['hive', 'figure 8']]
-value of set1 - set2: 1
-set2 - set1: [['beeswax', 'bees'], ['nectar', 'minerals'], ['water', 'bees'], ['nectar', 'fruit trees'], ['hive', 'shake'], ['distance', 'hive'], ['water', 'minerals'], ['water', 'honey'], ['nectar', 'house bees'], ['house bees', 'water'], ['sun', 'distance'], ['abdomen', 'bees'], ['honey', 'evaporation'], ['nectar', 'dry'], ['hive', 'dry']]
-value of set2 - set1: 15
-similarity = 15/(15 + 0.5*1 + 0.5*15)=0.6521739130434783
+cookiemilk.calc_tversky(bees_text, bees_cmap, comparison='propositional')
 ```
 
-Well, the propositional similarity between these two graphs is 0.65.
+The result shows that the propositional similarity between these two graphs is 0.3137.
 
 ## Step 3 Visualization
 We can use the function `draw` to show a graph, it will draw the graph using `D3.js` and display it by `pywebview`. Let's take a look at `bee_cmap`.
