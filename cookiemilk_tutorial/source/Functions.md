@@ -1,4 +1,4 @@
-# Functions
+# <a id="4"></a>Functions
 
 ## cmap2graph()
 
