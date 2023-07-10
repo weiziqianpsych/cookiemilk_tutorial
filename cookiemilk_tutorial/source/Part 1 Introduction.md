@@ -2,7 +2,9 @@
 
 ## 1.1 What is cookiemilk
 
-The Python package *cookiemilk* is an easy-to-use tool to process knowledge structure data automatically and quickly, including (a) data conversion (e.g., converting concept maps or essays to graphs), (b) graph-based features calculation, and (c) graph visualization. The *cookiemilk* package is mainly based on the Linear Aggregate Approach (Clariana et al., 2009), but also enables calculations of some features introduced by Pirnay-Dummer and Ifenthaler (2011). The name of the package is inspired by my cats. Cookie is an American Shorthair cat, and Milk is a British Shorthair cat.
+The Python package *cookiemilk* is an easy-to-use tool to process knowledge structure data automatically and quickly, including (a) data conversion (e.g., converting concept maps or essays to graphs), (b) graph-based features calculation, and (c) graph visualization. The *cookiemilk* package is mainly based on the Linear Aggregate Approach (Clariana et al., 2009), but also enables calculations of some features introduced by Pirnay-Dummer and Ifenthaler (2011). 
+
+This package is based on the code I wrote to analyze data for my Master's thesis. I arrange the code in a package so that other people who are doing similar studies can use the package to analyze data conveniently and put the KS research forward. The name of the package is inspired by my cats. Cookie is an American Shorthair cat, and Milk is a British Shorthair cat.
 
 ![img1](/img/logo.svg)
 
