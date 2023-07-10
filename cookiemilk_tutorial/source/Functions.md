@@ -1,4 +1,4 @@
-# Functions for data arrangement
+# Functions
 
 ## cmap2graph()
 
