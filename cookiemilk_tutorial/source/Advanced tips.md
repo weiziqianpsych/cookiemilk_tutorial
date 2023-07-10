@@ -1,19 +1,19 @@
 # Part 3 Advanced tips
 
-## 1 Process a large dataset
+## <a id="3.1"></a>3.1 Process a large dataset
 
 Editing...
 
 
-## 2 Use latent semantic analysis to generate an expert model
+## 3.2 Use latent semantic analysis to generate an expert model
 
 Editing...
 
-## 3 About Tversky similarity
+## 3.3 About Tversky similarity
 
 Editing...
 
-## 4 About graph centrality
+## 3.4 About graph centrality
 
 In this part, I will show you how to calculate graph centrality by hand so that you can understand how the holistic structure of a graph is estimated. And then I will show you how to use the function `calc_gcent` to calculate graph centrality conveniently.
 
