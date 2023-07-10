@@ -1,6 +1,6 @@
-# A quick start
+# Part 2 A quick start
 
-## Step 1 Load data
+## 2.1 Step 1 Load data
 
 First of all, import the package.
 ```
