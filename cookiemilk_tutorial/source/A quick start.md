@@ -1,5 +1,9 @@
 # Part 2 A quick start
 
+**NOTE**: for now, you can use a function called `quick_analysis` to achieve data conversion, processing and visulization with a big dataset in a simple and straightforward way (this is what you may want to do for your own research), more information about this function can be found on [Section 3.1](Advanced tips.md#3.1). But before that, I recommend you read through this section to understand how cookiemilk works, and you can also try to run the following example codes to process a single data file to see if it is processed correctly in every step. 
+
+**NOTE**: in this tutorial, I assume that you have basic knowledge of Graph Theory (i.e., you know the concepts like network, node, edge, centrality, etc.) and you have read the literature on Knowledge Structure research (e.g., some works from Roy Clariana, Dirk Ifenthaler and Pablo Pirnay-Dummer). I would not introduce background knowledge, instead, the purpose of this tutorial is to help you to understand how to use the package "cookiemilk" to process data.
+
 ## 2.1 Step 1 Load data
 
 First of all, import the package.
@@ -7,9 +11,8 @@ First of all, import the package.
 import cookiemilk
 ```
 
-### Load a concept map from a file
-For a concept map in the proposition format (i.e., the links/edge are unweighted, which means the values of the links/edges are 1 or 0), we can load it by using the function `cmap2graph` when setting the argument `data_type='pairs'`. To do this, the data should be arranged in a way like this:
-
+### 2.1.1 Load a concept map from a file
+For a concept map in the proposition format (i.e., links/edges are unweighted, which means the values of links/edges are 1 or 0), we can load it by using the function `cmap2graph` when setting the argument `data_type='proposition'`. To do this, the data should be arranged in a way like this:
 
 beeswax &emsp; minerals \
 bees &emsp; figure 8 \
@@ -30,18 +33,17 @@ abdomen &emsp; figure 8 \
 dry &emsp; house bees \
 honey &emsp; house bees
 
-
-You can save such kind of content in a .txt file, like this:
+We can save such kind of content in a .txt file called "bees_student_cmap_en.txt":
 ![img1](/img/cmap_file.png)
 
-And we can use `cmap2graph` to load and convert it into a NetworkX graph.
+Then we can use `cmap2graph` to load and convert it into a graph.
 ```
-bees_cmap = cookiemilk.cmap2graph(file='bees_student_cmap_en.txt', data_type='pairs')
+bees_cmap = cookiemilk.cmap2graph(data='bees_student_cmap_en.txt', data_type='proposition')
 ```
 
-### Load a concept map via codes
+### 2.1.2 Load a concept map via code
 
-You can also load data by writing some codes. For example, the concept map data above can be loaded like this.
+We can also load data by writing code. For example, the concept map data above can be saved as a list object in Python and be loaded like this. To do this, we need to set the argument `read_from_file=False`.
 
 ```
 my_cmap = [['beeswax', 'minerals'],
@@ -63,33 +65,31 @@ my_cmap = [['beeswax', 'minerals'],
            ['dry', 'house bees'],
            ['honey', 'house bees']]
 
-student_cmap = cookiemilk.cmap2graph(data=my_cmap, data_type='pair', read_from_file=False)
+student_cmap = cookiemilk.cmap2graph(data=my_cmap, data_type='proposition', read_from_file=False)
 ```
 
-### Load a matrix from a file
-You can also load a matrix when setting the argument `data_type='array'` (this matrix can be seen as a weighted concept map linking each node together). For example, here is a matrix data that we want to load. This data was exported from the software JRateDrag, which was used in previous studies for conducting the sorting task.
+### 2.1.3 Load a matrix from a file
+We can load a matrix when setting the argument `data_type='array'` (this matrix can be seen as a weighted concept map). For example, here is a matrix data that we want to load. This data is exported from the software JRateDrag, which is used in the literature to conduct the sorting task to measure students' knowledge structure. This is a .prx file, but it can be read as the same as a .txt file.
 
 ![img1](/img/prx.png)
 
 Let's take a look at the information of the data and then adjust the settings. **This is important because inappropriate settings will make your results wrong**. 
 
-First, this is distance data (which means the values in the matrix represent dissimilarities) rather than data containing 1 or 0 only, so we need to set the argument `pfnet=True` to use the pathfinder algorithm to convert it into a *PFNet* (i.e., an unweighted graph that only contains a few links/edges). When we conduct the pathfinder algorithm, the imported matrix should be a dissimilarities matrix, and this is what this data is, so we do not need to do the matrix transformation (i.e., we set the argument `max=None` and `mix=None`, which are the default settings. Another usage of the argument `max` and `min` in the software JPathfinder defines the range of the values in the matrix, but it's fine to ignore these two arguments because all values will be within the range in most of the situations). 
+First, this is a distance matrix, which means the values of elements in the matrix represent dissimilarities, so we need to set the argument `pfnet=True` to use the pathfinder algorithm to convert it into a *PFNet* (i.e., an undirected and unweighted graph that only contains a few links/edges). When we conduct the pathfinder algorithm, the imported matrix should be a dissimilarity matrix, and this is what this data is, so we do not need to do the matrix transformation (i.e., by setting the argument `max=None` and `mix=None`, which are the default settings; Another usage of the argument `max` and `min` in the software JPathfinder defines the range of the values in the matrix, but sometimes it's fine to ignore these two arguments because all values will be within the range in most of the situations). By the way, our data may be a full matrix or a triangle matrix (the example here is a triangle matrix), but we do not need to worry about that, because the function `cmap2graph` will do the matrix transformation automatically when it is necessary.
 
-Second, we only need to load the matrix, so the information at the beginning of the file is unnecessary. Thus, we need to set the argument `read_from=7` to read the file from the 7th line, which is the start of the matrix. 
+Second, we only need to load the matrix, so the information at the beginning of the file is unnecessary. Thus, we need to set the argument `read_from=7` to read the file from line 7, which is the start of the matrix (NOTE: in Python, the first line is line 0). 
 
-Third, do not forget to define a list with terms in an appropriate order (i.e., the variable `keyterms` below).
+Third, we need to define a list of key concepts in an appropriate order (i.e., see `key_terms` below).
 
-By the way, your data may be a full matrix or a triangle matrix (the example here is a triangle matrix), but you do not need to worry about that, because the function `cmap2graph` will do the matrix transformation automatically when it is necessary.
-
-Now, here are the codes.
+Now, here is the code.
 
 ```
 key_terms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
             'hive', 'shake', 'honey', 'abdomen', 'figure 8', 'minerals',
             'bees', 'evaporation', 'dry', 'fruit trees']
             
-triangle = cookiemilk.cmap2graph(file='/Users/weiziqian/jpf/triangle.prx', data_type='array', key_terms=key_terms,
-                                 read_from=7, pfnet=True)
+triangle = cookiemilk.cmap2graph(data='triangle.prx', data_type='array', key_terms=key_terms,
+                                 read_from_file=True, read_from=7, pfnet=True)
                                  
 cookiemilk.draw(triangle)
 ```
@@ -98,35 +98,39 @@ And this is what we got.
 
 ![img1](/img/triangle_graph.png)
 
-We can also take a look at what the PFNet looks like if we do the same thing via JPathfinder software. You can find that the graph is consistent.
+We can also take a look at what the PFNet looks like if we do the same thing via the JPathfinder software. We can find that the graph is the same.
 
 ![img1](/img/triangle_pfnet.png)
 
-### Load a matrix via codes
+### 2.1.4 Load a matrix via code
 It is possible, but I do not recommend it unless you want to debug or test something.
 
-### Load a text from a file
+### 2.1.5 Load a text from a file
 
-If you have a file like this, you can load it via the function `text2graph`. Here we use a document derived from the PISA reading test, the title of this document is *Collecting Nectar*.
+For example, we have a document derived from the PISA reading test, the title of this document is *Collecting Nectar*. We can load it via the function `text2graph`. 
 
 ![img1](/img/bee_text.png)
 
-To do so, you need to provide the key terms in the text by defining a list object in Python (see `key_terms` below). Here are the codes.
+To do so, we need to provide the key terms in the text by defining a list object in Python (see `key_terms` below).
 
 ```
 key_terms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
             'hive', 'shake', 'honey', 'abdomen', 'figure 8', 'minerals',
             'bees', 'evaporation', 'dry', 'fruit trees']
             
-my_data = cookiemilk.text2graph(text='bee_text.txt', key_terms=key_terms, as_lower=True)
+my_data = cookiemilk.text2graph(data='bee_text.txt', key_terms=key_terms, as_lower=True)
 ```
 
-**NOTE: if the text is written in English, I strongly recommend you to provide terms in lower case and set the argument `as_lower=True`.** When the argument `as_lower=True` (the default setting), it will convert all of the words in the text to lowercase, so that all key terms can be identified correctly. But, if there are key terms in upper case (e.g., abbreviations like 'GPS') and all of the corresponding terms in the text are also written in upper case, you can consider setting the argument `as_lower=False`.
+**NOTE: if the text is written in English, I strongly recommend you to provide terms in lowercase and set the argument `as_lower=True`.** When the argument `as_lower=True` (the default setting), it will convert all of the words in the text to lowercase, so that all key terms can be identified correctly.
 
 **NOTE: if there are synonyms in the text, try to use the argument `synonym` in the function `text2graph`.** You can find more details about it on the page of this function.
 
-### Load a text via codes
+**NOTE: You need to place the smaller words at the end of the key-term list if there are some bigger key-terms containing smaller ones.** For example, a text includes three key-terms called "the great waterfall", "waterfall" and "water". In this case, the term "waterfall" contains all the five characters in the term "water", and the term "the great waterfall" contains characters in "waterfall" and "water", so we need to define the key-term list like `ket_term = ["the great waterfall", "waterfall", "water"]`, which enables the bigger words being identified before the smaller ones (e.g., the string "the great waterfall" would not be identified as the term "water").
+
+### 2.1.6 Load a text via code
+
 We can also load this text from a string object in Python directly.
+
 ```
 text = 'Bees make honey to survive. It is their only essential food. If there are 60,000 bees in a hive about one ' \
        'third of them will be involved in gathering nectar which is then made into honey by the house bees. A small ' \
@@ -149,28 +153,32 @@ text = 'Bees make honey to survive. It is their only essential food. If there ar
        'and from the same area. Some of the main sources of nectar are fruit trees, clover and flowering trees. '
 ```
 
-And we also need to list which key terms were used in the text.
+And here is the code.
+
 ```
 key_terms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
             'hive', 'shake', 'honey', 'abdomen', 'figure 8', 'minerals',
             'bees', 'evaporation', 'dry', 'fruit trees']
-```
 
-Now we can convert the text into a NetworkX graph by using `text2graph`.
-```
 bees_text = cookiemilk.text2graph(data=text, key_terms=key_terms, as_lower=True, read_from_file=False)
 ```
 
-## Step 2 Do some calculations
-For example, we can calculate the propositional similarity between `bees_text` and `bees_student` by using the function `calc_tversky`.
+## 2.2 Step 2 Do some calculations
+
+For example, we can calculate the propositional similarity between `bees_text` and `bees_student` mentioned above by using the function `calc_tversky`.
+
 ```
 cookiemilk.calc_tversky(bees_text, bees_cmap, comparison='propositional')
 ```
 
 The result shows that the propositional similarity between these two graphs is 0.3137.
 
-## Step 3 Visualization
-We can use the function `draw` to show a graph, it will draw the graph using `D3.js` and display it by `pywebview`. Let's take a look at `bee_cmap`.
+For detailed information on propositional similarity and other calculations, see [Functions](Functions.md#4).
+
+## 2.3 Step 3 Visualization
+
+We can draw and save a graph via the function `draw`, which will draw the graph using "D3.js" (a Javascript tool for data visualization) and display it by "pywebview" (a Python package to establish web windows). Let's take a look at the above example `bee_cmap`.
+
 ```
 cookiemilk.draw(bee_cmap)
 ```
@@ -178,10 +186,13 @@ cookiemilk.draw(bee_cmap)
 Result:
 ![img1](/img/draw.png)
 
-## Step 4 Average graph
-If we are conducting a behavioural experiment, one of the possible analyses that we may want to do is to check how networks differ between groups. Such a descriptive analysis can be done by generating average networks at the group level vis the function `average_graph`.
+**NOTE**: if you can not obtain the visualized graph via the above code, one possible reason is that the package "pywebview" does not work in the correct way on your computer. An alternative plan is to save the visualized graph directly rather than show it in a pywebview window. To do this, you can use `cookiemilk.draw(bee_cmap, show=False, save=True, filename='bee_cmap')`.
 
-Here is an example, I will show you how can we generate an average network based on data from three students. As shown below, different students used different key-terms in their concept maps. Student1 used the terms "A", "B", "C", and "D"; Student2 used the terms "B", "C", "E",  and "F"; Student3 used the term "A", "C", "D", and "G".
+## 2.4 Step 4 Average graph
+
+If we are conducting a behavioral experiment, one of the possible analyses that we may want to do is to check how graphs differ between groups. Such a descriptive analysis can be done by generating average networks at the group level vis the function `average_graph`.
+
+Here is an example, I will show you how can we generate an average graph based on data from three students. As shown below, different students used different key-terms in their concept maps. Student1 used the terms "A", "B", "C" and "D"; Student2 used the terms "B", "C", "E" and "F"; Student3 used the term "A", "C", "D" and "G". All of them construct three links based on their own key-terms.
 
 ```
 # example data
@@ -189,29 +200,29 @@ cmap_student1 = [['A', 'B'], ['B', 'C'], ['C', 'D']]
 cmap_student2 = [['F', 'B'], ['F', 'C'], ['F', 'E']]
 cmap_student3 = [['A', 'G'], ['G', 'C'], ['G', 'D']]
 
-student1 = cookiemilk.cmap2graph(cmap_student1, data_type='pair', read_from_file=False)
-student2 = cookiemilk.cmap2graph(cmap_student2, data_type='pair', read_from_file=False)
-student3 = cookiemilk.cmap2graph(cmap_student3, data_type='pair', read_from_file=False)
+student1 = cookiemilk.cmap2graph(data=cmap_student1, data_type='proposition', read_from_file=False)
+student2 = cookiemilk.cmap2graph(data=cmap_student2, data_type='proposition', read_from_file=False)
+student3 = cookiemilk.cmap2graph(data=cmap_student3, data_type='proposition', read_from_file=False)
 ```
 
-To use the function `average_graph`, we need to include three students' networks in a list object. And we also need to provide all of the key-terms.
+To use the function `average_graph`, we need to include three students' graphs in a list object, and we also need to provide all of the key-terms.
 
 ```
 # arrange data
 data = list([student1, student2, student3])
 
-keyterms = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+key_terms = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 ```
 
-In general, `average_graph` works as the following steps. First, each network will be represented as an n×n matrix (n = the number of key-terms). Each value in the matrix will be 1 or 0, with 1 = 'connected' and 0 = 'unconnected'. Second, a mean matrix based on all matrices will be defined and converted to a NetworkX graph. Third, the average network will be converted to a PFNet if the argument `PFNet`=TRUE. Finally, if the argument `n_core` is an integer, for example, 4, an average network containing only the four most important key-terms and related links will be returned. If the argument `n_core` is False (i.e., the default value), an average network containing all key-terms and links will be returned.
+In general, `average_graph` works as the following steps. First, each graph will be represented as an n×n matrix (n = the number of key-terms). Each value in the matrix will be 1 or 0, with 1 = 'connected' and 0 = 'unconnected'. Second, a mean matrix based on all matrices will be defined and converted to a graph. Third, the average graph will be converted to a PFNet if the argument `PFNet=TRUE`. Finally, if the argument `n_core` is an integer, for example, 4, an average network containing only the four most important key-terms and related links will be returned. If the argument `n_core` is False (i.e., the default value), an average network containing all key-terms and related links will be returned.
 
-Now, I will show you three approaches to generating average networks. NOTE: I only recommend the first and the second approach, and the third approach is just shown for explanations. The first approach (i.e., `average1`) generates an average PFNet containing all key-terms. The second approach (i.e., `average2`) generates an average PFNet **BUT** only containing the four most important key-terms and related links. The third approach (i.e., `average3`) generates an average non-PFNet graph with weighted edges.
+Now, I will show you three approaches to generating average networks. NOTE: I only recommend the first and the second approach, and the third approach is just shown for the explanation. The first approach (which results in `average1`) generates an average PFNet containing all key-terms. The second approach (which results in `average2`) generates an average PFNet **BUT** only containing the four most important key-terms and related links. The third approach (which results in `average3`) generates an average non-PFNet graph with weighted edges.
 
 ```
 # average
-average1 = cookiemilk.average_graph(data=data, keyterms=keyterms, n_core=False, pfnet=True)
-average2 = cookiemilk.average_graph(data=data, keyterms=keyterms, n_core=4, pfnet=True)
-average3 = cookiemilk.average_graph(data=data, keyterms=keyterms, n_core=False, pfnet=False)
+average1 = cookiemilk.average_graph(data=data, key_terms=key_terms, n_core=False, pfnet=True)
+average2 = cookiemilk.average_graph(data=data, key_terms=key_terms, n_core=4, pfnet=True)
+average3 = cookiemilk.average_graph(data=data, key_terms=key_terms, n_core=False, pfnet=False)
 
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -252,9 +263,7 @@ plt.show()
 Result:
 ![img1](/img/example_average.png)
 
-As shown in three students' networks (see the top in the above figure), the key-term "B" and "C" are the two most important key-terms in Student1's network, the key-term "F" is the most important in Student2's network, and the key-term "G" is the most important in Student3's network. 
-
-The first average network contains all key-terms that appear in three students' networks (i.e., from "A" to "G", see the bottom-left of the above figure). However, this approach may result in a large network if the dataset is large and different students used different key-terms. One of the possible solutions is to retain only the most important key-terms and related links in the average network. For doing this, we need to check the node centrality first.
+As shown in three students' graphs (see the top in the above figure), the key-term "B" and "C" are the two most important key-terms in Student1's graph, the key-term "F" is the most important in Student2's graph, and the key-term "G" is the most important in Student3's graph. The first average graph contains all key-terms that appear in three students' graphs (i.e., from "A" to "G", see the bottom-left of the above figure). However, this approach may result in a large graph if the dataset is large and different students used diverse key-terms. One of the possible solutions is to retain only the most important key-terms and related links in the average graph. For doing this, we need to check the node centrality first.
 
 ```
 nx.degree_centrality(average1)
@@ -266,9 +275,9 @@ Here are the results.
 {'B': 0.5, 'A': 0.3333333333333333, 'C': 0.6666666666666666, 'D': 0.3333333333333333, 'F': 0.5, 'E': 0.16666666666666666, 'G': 0.5}
 ```
 
-We find that "B", "C", "F", and "G" show the highest node centrality, so we can consider retaining only four nodes in the average network. Four is also the number of key-terms in each student's network, so this number seems appropriate in this case. By setting the argument `n_core`=4, we obtain the second average network (see the bottom-middle of the above figure). Note that keeping the size of the average network is important in some cases because some indices such as graph centrality (GC) only can be used to compare networks when the networks are about the same size.
+We find that "B", "C", "F", and "G" show the highest node centrality, so we can consider retaining only four nodes in the average graph. Four is also the number of key-terms in each student's graph, so this number seems appropriate in this case. By setting the argument `n_core`=4, we obtain the second average graph (see the bottom-middle of the above figure). Note that keeping the size of the average graph is important in some cases because some indices such as graph centrality (GC) only can be used to compare graphs when the graphs are about the same size.
 
-The third average network contains most of the information in the mean matrix (see the bottom-middle of the above figure), but it was less interpretable. This is why the argument `pfnet` and `n_core` are important for generating an average network.
+The third average graph contains most of the information in the mean matrix (see the bottom-middle of the above figure), but it was less interpretable. This is why the argument `pfnet` and `n_core` are important for generating an average graph.
 
 Finally, we can also use the function `draw` to show the average network.
 
