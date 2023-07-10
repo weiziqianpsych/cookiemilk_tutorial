@@ -35,7 +35,6 @@ import cookiemilk
 |:-----------------|:--------------|:------------|
 |Data arrangement  |cmap2graph              | import a concept map and convert it into a graph          |
 |                  |text2graph              | import a text and convert it into a graph                 |
-|                  |graph2prxfile           | save a graph in a proximity matrix as a plaintext file    |
 |Data processing   |pathfinder_network      | calculate the PFNet of a given graph                      |
 |                  |calc_surface_matching   | calculate the surface similarity between two graphs       |
 |                  |calc_graphical_matching | calculate the graphical similarity between two graphs     |
