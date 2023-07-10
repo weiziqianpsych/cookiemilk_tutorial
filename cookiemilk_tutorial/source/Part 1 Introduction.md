@@ -43,8 +43,8 @@ import cookiemilk
 |                  |numerical_sim           | calculate the numerical similarity                        |
 |                  |calc_tversky            | calculate the Tversky similarity between two graphs       |
 |Visualization     |draw                    | draw and/or save a graph                                  |
-|                  | average_graph          | generate an average graph                                 |
-|Others            | quick_analysis         | conduct data analysis using the above functions           |
+|                  |average_graph           | generate an average graph                                 |
+|Others            |quick_analysis          | conduct data analysis using the above functions           |
 
 ## 1.5 Dependencies
 `networkx`: A Python package for network analysis
