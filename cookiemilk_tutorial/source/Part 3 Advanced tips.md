@@ -1,9 +1,98 @@
 # Part 3 Advanced tips
 
-## <a id="3.1"></a>3.1 Process a large dataset
+## 3.1 Process a large dataset
 
-Editing...
+Now you can use the function `quick_analysis` to process big data easily. This function can do the basic things, but if you want to conduct some advanced analyses (e.g., analyzing data from an experiment where students use different key-terms in their essays or concept maps), you will need to write the code by yourself (see Part 2 for details).
 
+For example, we have four students' essays here. To use `quick_analysis`, We need to arrange these data in separate .txt files and put them in a folder called "data", while the expert essay (which will be used as the referent in some calculations) is saved as a file called "ref.txt" (NOTE: to use `quick_analysis`, you have to name the expert data as "ref.txt" exactly). Both the file "ref.txt" and the folder "data" should be included in a folder.
+
+![img1](/img/quick_analysis1.png)
+
+Then, you can use the following code to process the data.
+
+```
+import cookiemilk_project.cookiemilk as cookiemilk
+import numpy as np
+
+
+key_terms = ['longitudinal prediction',
+             'literacy development',
+             'cognitive skills',
+             'language skills',
+             'parental reports',
+             'reading achievement']
+
+my_data = cookiemilk.quick_analysis(
+
+    # the file path of the data
+    folder='/Users/weiziqian/Desktop/test/text',  # the folder containing ref.txt and students' data
+
+    # about students' data
+    data_type='text',  # data type, can be "proposition", "array" or "text"
+    key_terms=key_terms,  # key-terms in ref.txt and students' data
+    synonym=None,  # you can define synonyms here
+    as_lower=True,  # whether convert all the words into lowercase
+    pfnet=True,  # whether converting data into PFNets
+    max=1.1,  # a parameter of the pathfinder algorithm
+    min=0.1,  # a parameter of the pathfinder algorithm
+    r=np.inf,  # a parameter of the pathfinder algorithm
+    encoding='utf-8',  # the encoding format of data files
+    read_from=0,  # which line should the content in data files be read from
+
+    # about the expert data, the parameters are as same as the above
+    referent_type='text',
+    r_key_terms=key_terms,
+    r_synonym=None,
+    r_as_lower=True,
+    r_pfnet=True,
+    r_max=1.1,
+    r_min=0.1,
+    r_r=np.inf,
+    r_encoding='utf-8',
+    r_read_from=0,
+
+    # which calculations do you want to conduct (all available features are listed below)
+    calculation=[
+        'density',
+        'GC',
+        's_density',
+        's_GC',
+        's_surface',
+        's_concept',
+        's_link',
+        's_graphical',
+        's_semantic'
+    ],
+    alpha=0.5,  # a parameter of Tversky's similarity
+
+    # about the visualization
+    save_figures=True,  # whether to save the visualized graphs
+    canvas_size=(500, 500),
+    node_font='sans-serif',
+    node_fontsize=12,
+    node_fontcolour='black',
+    node_fillcolour='lightgrey',
+    node_size=12,
+    edge_colour='lightgrey',
+    edge_size=2,
+    edge_distance=100,
+    charge=-300,
+    window_size=(600, 600),
+
+    # about the average graph
+    save_average_figures=True,  # whether to generate the average graph
+    n_core=None
+)
+
+```
+
+After running the code, we can find a new folder called "networks", which containsing all visualized graphs and the average graph (if you chose to generate it), and a table file called "quick_analysis_20230710_145130.csv" (the numbers indicate the date and time). 
+
+![img1](/img/quick_analysis2.png)
+
+As shown below, the table file contains the results of the data.
+
+![img1](/img/quick_analysis3.png)
 
 ## 3.2 Use latent semantic analysis to generate an expert model
 
@@ -102,5 +191,7 @@ And the output is shown below.
 ```
 
 ### 4.3 References
-* Clariana, R. B., & Koul, R. (2004). A computer-based approach for translating text into concept map-like representations. In A. J. Canas, J. D. Novak, and F. M. Gonzales, Eds., *Concept maps: theory, methodology, technology*, vol. 2, in the Proceedings of the First International Conference on Concept Mapping, Pamplona, Spain, Sep 14-17, pp.131-134. 
-* Clariana, R. B., Rysavy, M. D., & Taricani, E. (2015). Text signals influence team artifacts. *Educational Technology Research and Development*, *63*(1), 35-52.
+
+Clariana, R. B., & Koul, R. (2004). A computer-based approach for translating text into concept map-like representations. In A. J. Canas, J. D. Novak, and F. M. Gonzales, Eds., *Concept maps: theory, methodology, technology*, vol. 2, in the Proceedings of the First International Conference on Concept Mapping, Pamplona, Spain, Sep 14-17, pp.131-134. 
+
+Clariana, R. B., Rysavy, M. D., & Taricani, E. (2015). Text signals influence team artifacts. *Educational Technology Research and Development*, *63*(1), 35-52.
