@@ -1,6 +1,6 @@
-# Introduction
+# 1 Introduction
 
-## What is cookiemilk
+## 1.1 What is cookiemilk
 
 The Python package `cookiemilk` is an easy-to-use tool to process knowledge structure data automatically and quickly, including (a) data conversion (e.g., converting concept maps or essays to graphs), (b) graph-based features calculation, and (c) graph visualization. The `cookiemilk` package is mainly based on the Linear Aggregate Approach (Clariana et al., 2009), but also enables calculations of some features introduced by Pirnay-Dummer and Ifenthaler (2011). The name of the package is inspired by my cats. Cookie is an American Shorthair cat, and Milk is a British Shorthair cat.
 
@@ -11,7 +11,7 @@ Clariana, R. B., Wallace, P. E., & Godshalk, V. M. (2009). Deriving and measurin
 
 Pirnay-Dummer, P., & Ifenthaler, D. (2011). Reading guided by automated graphical representations: How model-based text visualizations facilitate learning in reading comprehension tasks. *Instructional Science*, *39*(6), 901-919.
 
-## Installation
+## 1.2 Installation
 
 Windows:
 ```
@@ -23,21 +23,12 @@ Unix/macOS:
 python3 -m pip install --upgrade cookiemilk
 ```
 
-## Import
+## 1.3 Import
 ```
 import cookiemilk
 ```
 
-## Dependencies
-`networkx`: A Python package for network analysis
-
-`numpy`: A Python package for scientific computing
-
-`pywebview`: A Python package for building GUI with JavaScript, HTML, and CSS
-
-`d3.js`: A JavaScript library for manipulating documents based on data
-
-## Main functions
+## 1.4 Main functions
 
 |Usage             | Functions     | Description |
 |:-----------------|:--------------|:------------|
@@ -54,7 +45,16 @@ import cookiemilk
 |                  | average_graph          | generate an average graph                                 |
 |Others            | quick_analysis         | conduct data analysis using the above functions           |
 
-## Citation
+## 1.5 Dependencies
+`networkx`: A Python package for network analysis
+
+`numpy`: A Python package for scientific computing
+
+`pywebview`: A Python package for building GUI with JavaScript, HTML, and CSS
+
+`d3.js`: A JavaScript library for manipulating documents based on data
+
+## 1.6 Citation
 To cite the `cookiemilk` package in publications use:
 
 Wei, Z. (2023). *cookiemilk: An easy-to-use Python package to process knowledge structure data automatically*. South China Normal University, Guangzhou, China. Python package, [https://pypi.org/project/cookiemilk/](https://pypi.org/project/cookiemilk/).
