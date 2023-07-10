@@ -6,7 +6,7 @@
 
 The name of the package is inspired by my cats. Cookie is an American Shorthair cat, and Milk is a British Shorthair cat.
 
-![img1](/img/cookiemilk_Small.png)
+![img1](/img/logo.svg)
 
 Say with me: Thank you Cookie and Milk for helping me process data!
 
