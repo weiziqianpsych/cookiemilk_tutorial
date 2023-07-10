@@ -450,6 +450,7 @@ average2 = cookiemilk.average_graph(data=data, keyterms=keyterms, n_core=4, pfne
 
 ## Quick_analysis
 
+```
 quick_analysis(
         folder,
         data_type,
@@ -494,3 +495,4 @@ quick_analysis(
         charge=-300,
         window_size=(600, 600)
 )
+```
