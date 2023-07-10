@@ -10,9 +10,9 @@ Welcome to use cookiemilk!
    :maxdepth: 2
    :caption: Contents
    
-   Introduction
-   A quick start
-   Advanced tips
+   Part 1 Introduction
+   Part 2 A quick start
+   Part 3 Advanced tips
    Functions for data arrangement
    Functions for data processing
    Functions for network visualization
