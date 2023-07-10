@@ -13,9 +13,7 @@ Welcome to use cookiemilk!
    Part 1 Introduction
    Part 2 A quick start
    Part 3 Advanced tips
-   Functions for data arrangement
-   Functions for data processing
-   Functions for network visualization
+   Functions
 
 .. Indices and tables
 .. ==================
