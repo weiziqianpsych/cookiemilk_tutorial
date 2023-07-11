@@ -26,6 +26,8 @@ Unix/macOS:
 python3 -m pip install --upgrade cookiemilk
 ```
 
+**NOTE**: As same as many other Python packages, *cookiemilk* works exactly the same on devices with different systems. This means that you can run the example code in this tutorial on either a Windows PC or a Mac. The only different thing is the way to install it.
+
 ## 1.3 Import
 ```
 import cookiemilk
