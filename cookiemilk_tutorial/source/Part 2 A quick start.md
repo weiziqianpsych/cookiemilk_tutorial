@@ -1,6 +1,6 @@
 # Part 2 A quick start
 
-**NOTE**: for now, you can use a function called `quick_analysis` to achieve data conversion, processing and visulization with a big dataset in a simple and straightforward way (this is what you may want to do for your own research), more information about this function can be found on "Part 3 Advanced tips". But before that, I recommend you read through this section to understand how cookiemilk works, and you can also try to run the following example codes to process a single data file to see if it is processed correctly in every step. 
+**NOTE**: for now, you can use a function called `quick_analysis` to achieve data conversion, processing and visulization with a big dataset in a simple and straightforward way (which I think is what you may want to do for your own research), more information about this function can be found on "Part 3 Advanced tips". But before that, I recommend you read through this section to understand how cookiemilk works, and you can also try to run the following example code to see if it is working correctly in every step on your own computer. 
 
 **NOTE**: in this tutorial, I assume that you have basic knowledge of Graph Theory (i.e., you know the concepts like network, node, edge, centrality, etc.) and you have read the literature on Knowledge Structure research (e.g., some works from Roy Clariana, Dirk Ifenthaler and Pablo Pirnay-Dummer). I would not introduce background knowledge, instead, the purpose of this tutorial is to help you to understand how to use the package "cookiemilk" to process data.
 
