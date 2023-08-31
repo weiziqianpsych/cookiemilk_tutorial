@@ -248,6 +248,6 @@ cookiemilk.draw(graph=bees_bert, show=False, save=True, filename="fig_bert")
 
 ```
 
-And here are the visualized models. You may notice that some key-terms disappear in the latter three models. This is because there are no related edges after the pathfinder algorithm, and thus these nodes are ignored. Because we used different corpora in different approaches, these models cannot be compared directly. However, the examples show that word-embedding models are more concise and possibly can be used as automatically generated expert references.
+And here are the visualized models. You may notice that some key-terms disappear in the latter three models. This is because there are no related edges after performing the pathfinder algorithm, and thus these nodes are ignored. Because we used different corpora in different approaches, these models cannot be compared directly. However, the examples show that word-embedding models are more concise and possibly can be used as automatically generated expert references.
 
 ![img1](/img/word_embeding_test.png)
