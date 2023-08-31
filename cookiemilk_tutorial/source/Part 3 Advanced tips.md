@@ -11,7 +11,7 @@ In this example, we have four students' essays. To use `quick_analysis`, we need
 Then, you can use the following code for data processing.
 
 ```
-import cookiemilk_project.cookiemilk as cookiemilk
+import cookiemilk
 import numpy as np
 
 
