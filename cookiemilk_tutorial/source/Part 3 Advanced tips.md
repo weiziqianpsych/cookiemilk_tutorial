@@ -2,19 +2,20 @@
 
 ## 3.1 Process a large dataset
 
-Now you can use the function `quick_analysis` to process big data easily. This function can do the basic things, but if you want to conduct some advanced analyses (e.g., analyzing data from an experiment where students use different key-terms in their essays or concept maps), you will need to write the code by yourself (see Part 2 for details).
+Now you can utilize the function `quick_analysis` to process big data easily. This function can do the basic things, but if you want to conduct some advanced analyses (e.g., analyzing data from an experiment where students use different key-terms in their essays or concept maps), you will need to do the coding by yourself (see Part 2 for details).
 
-For example, we have four students' essays here. To use `quick_analysis`, We need to arrange these data in separate .txt files and put them in a folder called "data", while the expert essay (which will be used as the referent in some calculations) is saved as a file called "ref.txt" (NOTE: to use `quick_analysis`, you have to name the expert data as "ref.txt" exactly). Both the file "ref.txt" and the folder "data" should be included in a folder.
+In this example, we have four students' essays. To use `quick_analysis`, we need to arrange different students' essays in separate .txt files and put them in a folder called "data", while the expert essay (which will be used as the referent network in the calculation) is saved as a file called "ref.txt". To use `quick_analysis`, you will need to name the expert data as "ref.txt" exactly. Both the file "ref.txt" and the folder "data" should be included in a parent folder.
 
 ![img1](/img/quick_analysis1.png)
 
-Then, you can use the following code to process the data.
+Then, you can use the following code for data processing.
 
 ```
 import cookiemilk_project.cookiemilk as cookiemilk
 import numpy as np
 
 
+# The key-terms. MODIFY IT ACCORDING TO THE KEY-TERMS IN YOUR DATA
 key_terms = ['longitudinal prediction',
              'literacy development',
              'cognitive skills',
@@ -22,87 +23,79 @@ key_terms = ['longitudinal prediction',
              'parental reports',
              'reading achievement']
 
+# The parameters
 my_data = cookiemilk.quick_analysis(
-
     # the file path of the data
-    folder='/Users/weiziqian/Desktop/test/text',  # the folder containing ref.txt and students' data
+    folder='/Users/weiziqian/Desktop/test/text',  # the folder containing ref.txt and students' data. MODIFY IT ACCORDING TO THE FILE PATH OF YOUR DATA
 
     # about students' data
-    data_type='text',  # data type, can be "proposition", "array" or "text"
-    key_terms=key_terms,  # key-terms in ref.txt and students' data
+    data_type='text',  # data type, can be "proposition", "array" or "text". MODIFY IT ACCORDING TO THE CHARACTERISTICS OF YOUR DATA
+    key_terms=key_terms,  # key-terms
     synonym=None,  # you can define synonyms here
-    as_lower=True,  # whether convert all the words into lowercase
+    as_lower=True,  # whether convert all the alphabetical strings into lowercase. MODIFY IT ACCORDING TO THE CHARACTERISTICS OF YOUR DATA
     pfnet=True,  # whether converting data into PFNets
-    max=1.1,  # a parameter of the pathfinder algorithm
-    min=0.1,  # a parameter of the pathfinder algorithm
+    max=1.1,  # a parameter of the pathfinder algorithm. MODIFY IT ACCORDING TO THE CHARACTERISTICS OF YOUR DATA
+    min=0.1,  # a parameter of the pathfinder algorithm. MODIFY IT ACCORDING TO THE CHARACTERISTICS OF YOUR DATA
     r=np.inf,  # a parameter of the pathfinder algorithm
-    encoding='utf-8',  # the encoding format of data files
-    read_from=0,  # which line should the content in data files be read from
+    encoding='utf-8',  # the encoding format of data files. MODIFY IT ACCORDING TO THE TYPE OF YOUR .TEX FILES
+    read_from=0,  # which line should the content in data files be read from. MODIFY IT ACCORDING to THE CHARACTERISTICS OF YOUR DATA
 
     # about the expert data, the parameters are as same as the above
     referent_type='text',
     r_key_terms=key_terms,
     r_synonym=None,
-    r_as_lower=True,
+    r_as_lower=True,  # MODIFY IT ACCORDING TO THE CHARACTERISTICS OF YOUR DATA
     r_pfnet=True,
-    r_max=1.1,
-    r_min=0.1,
-    r_r=np.inf,
+    r_max=1.1,  # MODIFY IT ACCORDING TO THE CHARACTERISTICS OF YOUR DATA
+    r_min=0.1,  # MODIFY IT ACCORDING TO THE CHARACTERISTICS OF YOUR DATA
+    r_r=np.inf,  # MODIFY IT ACCORDING TO THE TYPE OF YOUR .TEX FILES
     r_encoding='utf-8',
-    r_read_from=0,
+    r_read_from=0,  # MODIFY IT ACCORDING to THE CHARACTERISTICS OF YOUR DATA
 
-    # which calculations do you want to conduct (all available features are listed below)
+    # Graph-based features calculation (all available features are listed below)
     calculation=[
-        'density',
-        'GC',
-        's_density',
-        's_GC',
-        's_surface',
-        's_concept',
-        's_link',
-        's_graphical',
-        's_semantic'
+        'density',  # graph density
+        'GC', # holistic graph centrality
+        's_density',  # similarity of graph density between students' KSs and the expert KS 
+        's_GC',  # similarity of graph centrality between students' KSs and the expert KS 
+        's_surface',  # similarity of surface similarity between students' KSs and the expert KS 
+        's_concept',  # similarity of conceptual similarity between students' KSs and the expert KS
+        's_link',  # similarity of propositional similarity between students' KSs and the expert KS
+        's_graphical',  # similarity of graphical similarity between students' KSs and the expert KS
+        's_semantic'  # similarity of balanced semantic similarity between students' KSs and the expert KS
     ],
     alpha=0.5,  # a parameter of Tversky's similarity
 
-    # about the visualization
+    # Visualization
     save_figures=True,  # whether to save the visualized graphs
-    canvas_size=(500, 500),
-    node_font='sans-serif',
-    node_fontsize=12,
-    node_fontcolour='black',
-    node_fillcolour='lightgrey',
-    node_size=12,
-    edge_colour='lightgrey',
-    edge_size=2,
-    edge_distance=100,
-    charge=-300,
-    window_size=(600, 600),
+    canvas_size=(500, 500),  # the canvas size
+    node_font='sans-serif',  # the font style for node labels
+    node_fontsize=12,  # the font size for node labels
+    node_fontcolour='black',  # the font color for node lebels
+    node_fillcolour='lightgrey',  # the node color
+    node_size=12,  # the node size
+    edge_colour='lightgrey',  # the edge color
+    edge_size=2,  # the edge size
+    edge_distance=100,  # the edge distance
+    charge=-300,  # the charge force in d3.js 
+    window_size=(600, 600),  # the window size in pywebview
 
-    # about the average graph
+    # The average graph
     save_average_figures=True,  # whether to generate the average graph
-    n_core=None
+    n_core=None  # the number of core concepts
 )
 
 ```
 
-After running the code, we can find a new folder called "networks", which containsing all visualized graphs and the average graph (if you chose to generate it), and a table file called "quick_analysis_20230710_145130.csv" (the numbers indicate the date and time). 
+After running the code, we can find a new folder called "networks", which containing all visualized graphs and the average graph (if you chose to generate it), and a table file called "quick_analysis_20230710_145130.csv" (the numbers indicate the date and time). 
 
 ![img1](/img/quick_analysis2.png)
 
-As shown below, the table file contains the results of the data.
+As shown below, the table file contains the basic information (e.g., the number of concepts, the number of links) and results of the features calculation. 
 
 ![img1](/img/quick_analysis3.png)
 
-## 3.2 Use latent semantic analysis to generate an expert model
-
-Editing...
-
-## 3.3 About Tversky similarity
-
-Editing...
-
-## 3.4 About graph centrality
+## 3.2 About graph centrality
 
 In this part, I will show you how to calculate graph centrality by hand so that you can understand how the holistic structure of a graph is estimated. And then I will show you how to use the function `calc_gcent` to calculate graph centrality conveniently.
 
@@ -110,7 +103,7 @@ We will use an example network from Clariana and Koul's research (2004). Please 
 
 ![img1](/img/example_pfnet.png)
 
-### 4.1 Calculate graph centrality manually
+### Calculate graph centrality manually
 
 The equations of graph centrality are shown below (Clariana, Rysavy, & Taricani, 2015).
 
@@ -148,7 +141,7 @@ CD(G) = [(0.75 - 0.75) + (0.75 - 0.75) + (0.75 - 0.50) + (0.75 - 0.25) + (0.75 -
 
 As result, C~D~(G) of this PFNet is 0.4267. I hope this example is useful for you to understand the calculation of graph centrality. 
 
-### 4.2 Use `calc_gcent` to calculate graph centrality
+### Use `calc_gcent` to calculate graph centrality
 
 Finally, let's try to use `calc_gcent` to calculate the graph centrality of this PFNet automatically.
 
@@ -160,10 +153,10 @@ my_cmap1 = [['car', 'cat'], ['cat', 'pet'], ['cat', 'dog'], ['pet', 'dog'], ['do
 my_data1 = cookiemilk.cmap2graph(file=my_cmap1, data_type='pair', read_from_file=False)
 
 # calculation
-my_result = cookiemilk.calc_gcent(my_data1, detailed=True)
+my_results = cookiemilk.calc_gcent(my_data1, detailed=True)
 ```
 
-And here is the result. We have set the argument `detailed=True`, which will enable us to check each step of the calculation. When analyzing data, you can set the argument `detailed=False` to avoid redundant outputs.
+And here are the results. We have set the argument `detailed=True`, which will enable us to check each step of the calculation. When analyzing data, you can set the argument `detailed=False` to avoid redundant outputs.
 
 ```
 adjacency matrix:
@@ -178,10 +171,10 @@ ncent: [0.25 0.75 0.5  0.75 0.25]
 gcent: 0.41666666666666663
 ```
 
-As the result is stored in the variable `my_result`, we can also print it to see the value of graph centrality.
+As the results are stored in the variable `my_results`, we can also print it to see the value of graph centrality.
 
 ```
-print(my_result)
+print(my_results)
 ```
 
 And the output is shown below.
@@ -190,7 +183,7 @@ And the output is shown below.
 0.41666666666666663
 ```
 
-### 4.3 References
+### References
 
 Clariana, R. B., & Koul, R. (2004). A computer-based approach for translating text into concept map-like representations. In A. J. Canas, J. D. Novak, and F. M. Gonzales, Eds., *Concept maps: theory, methodology, technology*, vol. 2, in the Proceedings of the First International Conference on Concept Mapping, Pamplona, Spain, Sep 14-17, pp.131-134. 
 
