@@ -188,3 +188,17 @@ And the output is shown below.
 Clariana, R. B., & Koul, R. (2004). A computer-based approach for translating text into concept map-like representations. In A. J. Canas, J. D. Novak, and F. M. Gonzales, Eds., *Concept maps: theory, methodology, technology*, vol. 2, in the Proceedings of the First International Conference on Concept Mapping, Pamplona, Spain, Sep 14-17, pp.131-134. 
 
 Clariana, R. B., Rysavy, M. D., & Taricani, E. (2015). Text signals influence team artifacts. *Educational Technology Research and Development*, *63*(1), 35-52.
+
+## 3.3 Use word embedding methods to generate expert models
+
+Here I will show you some examples to construt KSs with specific key-terms via word embedding methods and use them as expert models in *cookiemilk*.
+
+First, open the website [http://wordvec.colorado.edu](http://wordvec.colorado.edu). You can also find basic information of Latent Semantic Analysis (LSA), word2vec and BERT from the website (these are the three approaches used in the following examples).
+
+we can click "Matrix Comparison", and then select arguments, input key-terms (I used the example key-terms in "Part 2 A quick start") and submit. The similarity matrix will be presented.
+
+
+
+
+
+
