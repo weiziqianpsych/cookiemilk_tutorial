@@ -1,18 +1,18 @@
 # Part 2 A quick start
 
-**NOTE**: for now, you can use a function called `quick_analysis` to achieve data conversion, processing and visulization with a big dataset in a simple and straightforward way (which I think is what you may want to do for your own research), more information about this function can be found on "Part 3 Advanced tips". But before that, I recommend you read through this section to understand how cookiemilk works, and you can also try to run the following example code to see if it is working correctly in every step on your own computer. 
+**NOTE**: For now, you can utilize a function called `quick_analysis` to achieve data conversion, processing and visualization on large datasets easily and straightforwardly (more information is available in "Part 3 Advanced tips"). But before that, I recommend walking through this section and the example code to learn how *cookiemilk* works at each step.
 
-**NOTE**: in this tutorial, I assume that you have basic knowledge of Graph Theory (i.e., you know the concepts like network, node, edge, centrality, etc.) and you have read the literature on Knowledge Structure research (e.g., some works from Roy Clariana, Dirk Ifenthaler and Pablo Pirnay-Dummer). I would not introduce background knowledge, instead, the purpose of this tutorial is to help you to understand how to use the package "cookiemilk" to process data.
+**NOTE**: In this tutorial, I assume that you have a basic knowledge of Graph Theory (i.e., you know the concepts like graph, network, node, edge, centrality, etc.) and you are familar with Knowledge Structure studies such as research works from Roy Clariana, Dirk Ifenthaler and Pablo Pirnay-Dummer. The theoretical knowledge would not be introduced here. Instead, the purpose of this tutorial is to help you to understand how to use *cookiemilk* for data processing.
 
 ## 2.1 Step 1 Load data
 
-First of all, import the package.
+First, you'll need to import the package
 ```
 import cookiemilk
 ```
 
 ### 2.1.1 Load a concept map from a file
-For a concept map in the proposition format (i.e., links/edges are unweighted, which means the values of links/edges are 1 or 0), we can load it by using the function `cmap2graph` when setting the argument `data_type='proposition'`. To do this, the data should be arranged in a way like this:
+For a concept map in the proposition format (i.e., edges are unweighted, which means the values of edges are 1 or 0), we can load it by using the function `cmap2graph` when setting the argument `data_type='proposition'`. To do this, the data should be arranged in a way like this:
 
 beeswax &emsp; minerals \
 bees &emsp; figure 8 \
@@ -43,7 +43,7 @@ bees_cmap = cookiemilk.cmap2graph(data='bees_student_cmap_en.txt', data_type='pr
 
 ### 2.1.2 Load a concept map via code
 
-We can also load data by writing code. For example, the concept map data above can be saved as a list object in Python and be loaded like this. To do this, we need to set the argument `read_from_file=False`.
+We can also load data through coding. For example, the concept map data above can be saved as a list object in Python and be loaded like this. This is convenient if you only want to test a single case. To do this, we need to set the argument `read_from_file=False`.
 
 ```
 my_cmap = [['beeswax', 'minerals'],
@@ -69,17 +69,17 @@ student_cmap = cookiemilk.cmap2graph(data=my_cmap, data_type='proposition', read
 ```
 
 ### 2.1.3 Load a matrix from a file
-We can load a matrix when setting the argument `data_type='array'` (this matrix can be seen as a weighted concept map). For example, here is a matrix data that we want to load. This data is exported from the software JRateDrag, which is used in the literature to conduct the sorting task to measure students' knowledge structure. This is a .prx file, but it can be read as the same as a .txt file.
+We can load a matrix when setting the argument `data_type='array'` (this matrix can be seen as a weighted graph). For example, here is a matrix data that we want to load. This data was exported from the software JRateDrag, which is used in the literature to conduct the sorting task to measure students' knowledge structure. The matrix is in a .prx file, but it can be read as the same as a .txt file.
 
 ![img1](/img/prx.png)
 
-Let's take a look at the information of the data and then adjust the settings. **This is important because inappropriate settings will make your results wrong**. 
+Let's take a look at the data's information and then adjust the settings. **This is important because improper settings can lead to inaccurate results**. 
 
-First, this is a distance matrix, which means the values of elements in the matrix represent dissimilarities, so we need to set the argument `pfnet=True` to use the pathfinder algorithm to convert it into a *PFNet* (i.e., an undirected and unweighted graph that only contains a few links/edges). When we conduct the pathfinder algorithm, the imported matrix should be a dissimilarity matrix, and this is what this data is, so we do not need to do the matrix transformation (i.e., by setting the argument `max=None` and `mix=None`, which are the default settings; Another usage of the argument `max` and `min` in the software JPathfinder defines the range of the values in the matrix, but sometimes it's fine to ignore these two arguments because all values will be within the range in most of the situations). By the way, our data may be a full matrix or a triangle matrix (the example here is a triangle matrix), but we do not need to worry about that, because the function `cmap2graph` will do the matrix transformation automatically when it is necessary.
+First, this is a distance matrix, where the values represent dissimilarities. We need to set the argument `pfnet=True` to use the pathfinder algorithm to convert weighted graphs like this into a *PFNet*, which is an undirected and unweighted graph that only contains a few edges. The input matrix for the pathfinder algorithm should be a dissimilarity matrix, which matches the nature of this example data, so there is no need for additional matrix transformation. Therefore, you can keep the default settings for the argument `max` and `min`. These two arguments are also used to define the value range, similar to their function in the JPathfinder software, but generally, they can be left unspecified as all values fall within the expected range in most cases. By the way, the input data can be either a full matrix or a triangle matrix (the example here is a triangle one), but we do not need to worry about that, because the function `cmap2graph` will do the matrix transformation automatically when it is necessary.
 
-Second, we only need to load the matrix, so the information at the beginning of the file is unnecessary. Thus, we need to set the argument `read_from=7` to read the file from line 7, which is the start of the matrix (NOTE: in Python, the first line is line 0). 
+Second, we only need to load the matrix, so the information at the beginning of the file is unnecessary. Therefore, we should set the argument `read_from=7` to read the file from line 7, which is the start of the matrix (NOTE: in Python, the first line is line 0). 
 
-Third, we need to define a list of key concepts in an appropriate order (i.e., see `key_terms` below).
+Third, we need to define a list of key concepts in the appropriate order (see `key_terms` below).
 
 Now, here is the code.
 
@@ -89,7 +89,7 @@ key_terms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
             'bees', 'evaporation', 'dry', 'fruit trees']
             
 triangle = cookiemilk.cmap2graph(data='triangle.prx', data_type='array', key_terms=key_terms,
-                                 read_from_file=True, read_from=7, pfnet=True)
+                                 read_from_file=True, read_from=7, pfnet=True, max=None, min=None)
                                  
 cookiemilk.draw(triangle)
 ```
@@ -103,10 +103,9 @@ We can also take a look at what the PFNet looks like if we do the same thing via
 ![img1](/img/triangle_pfnet.png)
 
 ### 2.1.4 Load a matrix via code
-It is possible, but I do not recommend it unless you want to debug or test something.
+It is possible, but I do not recommend this way unless you want to debug or test something.
 
 ### 2.1.5 Load a text from a file
-
 For example, we have a document derived from the PISA reading test, the title of this document is *Collecting Nectar*. We can load it via the function `text2graph`. 
 
 ![img1](/img/bee_text.png)
@@ -125,7 +124,7 @@ my_data = cookiemilk.text2graph(data='bee_text.txt', key_terms=key_terms, as_low
 
 **NOTE: if there are synonyms in the text, try to use the argument `synonym` in the function `text2graph`.** You can find more details about it on the page of this function.
 
-**NOTE: You need to place the smaller words at the end of the key-term list if there are some bigger key-terms containing smaller ones.** For example, a text includes three key-terms called "the great waterfall", "waterfall" and "water". In this case, the term "waterfall" contains all the five characters in the term "water", and the term "the great waterfall" contains characters in "waterfall" and "water", so we need to define the key-term list like `ket_term = ["the great waterfall", "waterfall", "water"]`, which enables the bigger words being identified before the smaller ones (e.g., the string "the great waterfall" would not be identified as the term "water").
+**NOTE: When creating the key-term list, it's important to place smaller words at the end of the list if there are larger words containing smaller ones.** For example, a text includes three key-terms called "the great waterfall", "waterfall" and "water". In this case, the term "waterfall" contains all the five characters in the term "water", and the term "the great waterfall" contains characters in "waterfall" and "water", so we need to define the key-term list like `ket_term = ["the great waterfall", "waterfall", "water"]`, which enables the bigger words being identified before the smaller ones (e.g., the string "the great waterfall" would not be identified as the term "water").
 
 ### 2.1.6 Load a text via code
 
@@ -190,7 +189,7 @@ Result:
 
 ## 2.4 Step 4 Average graph
 
-If we are conducting a behavioral experiment, one of the possible analyses that we may want to do is to check how graphs differ between groups. Such a descriptive analysis can be done by generating average networks at the group level vis the function `average_graph`.
+If we are conducting a behavioral experiment, one of the possible analyses that we may want to do is to check how graphs differ between groups. Such a descriptive analysis can be done by generating average networks at the group level via the function `average_graph`.
 
 Here is an example, I will show you how can we generate an average graph based on data from three students. As shown below, different students used different key-terms in their concept maps. Student1 used the terms "A", "B", "C" and "D"; Student2 used the terms "B", "C", "E" and "F"; Student3 used the term "A", "C", "D" and "G". All of them construct three links based on their own key-terms.
 
@@ -214,9 +213,9 @@ data = list([student1, student2, student3])
 key_terms = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 ```
 
-In general, `average_graph` works as the following steps. First, each graph will be represented as an n×n matrix (n = the number of key-terms). Each value in the matrix will be 1 or 0, with 1 = 'connected' and 0 = 'unconnected'. Second, a mean matrix based on all matrices will be defined and converted to a graph. Third, the average graph will be converted to a PFNet if the argument `PFNet=TRUE`. Finally, if the argument `n_core` is an integer, for example, 4, an average network containing only the four most important key-terms and related links will be returned. If the argument `n_core` is False (i.e., the default value), an average network containing all key-terms and related links will be returned.
+In general, `average_graph` works as the following steps. First, each graph will be represented as an n×n matrix (n = the number of key-terms). Each value in the matrix will be 1 or 0, with 1 = 'connected' and 0 = 'unconnected'. Second, a mean matrix based on all matrices will be defined and converted to a graph. Third, the average graph will be converted to a PFNet if the argument `PFNet=True`. Finally, if the argument `n_core` is an integer, for example, 4, an average network containing only the four most important key-terms and related links will be returned. If the argument `n_core` is False (i.e., the default value), an average network containing all key-terms and related links will be returned.
 
-Now, I will show you three approaches to generating average networks. NOTE: I only recommend the first and the second approach, and the third approach is just shown for the explanation. The first approach (which results in `average1`) generates an average PFNet containing all key-terms. The second approach (which results in `average2`) generates an average PFNet **BUT** only containing the four most important key-terms and related links. The third approach (which results in `average3`) generates an average non-PFNet graph with weighted edges.
+Now, I will show you three approaches to generating average networks. Note that I only recommend the first and the second approach, and the third approach is just shown for the explanation. The first approach (which results in `average1`) generates an average PFNet containing all key-terms. The second approach (which results in `average2`) generates an average PFNet **BUT** only containing the four most important key-terms and related links. The third approach (which results in `average3`) generates an average non-PFNet graph with weighted edges.
 
 ```
 # average
