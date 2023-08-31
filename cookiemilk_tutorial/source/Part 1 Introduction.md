@@ -2,9 +2,11 @@
 
 ## 1.1 What is cookiemilk
 
-The Python package *cookiemilk* is an easy-to-use tool to process knowledge structure data automatically and quickly, including (a) data conversion (e.g., converting concept maps or essays to graphs), (b) graph-based features calculation, and (c) graph visualization. The *cookiemilk* package is mainly based on the Linear Aggregate Approach (Clariana et al., 2009), but also enables calculations of some features introduced by Pirnay-Dummer and Ifenthaler (2011). 
+The Python package *cookiemilk* is an easy-to-use tool to process knowledge structure data automatically and quickly. It includes (a) data conversion, such as converting concept maps or essays to graphs, (b) graph-based features calculation, and (c) graph visualization. The *cookiemilk* package is primarily based on the Linear Aggregate Approach (Clariana et al., 2009) but also allows for the calculation of some features introduced by Pirnay-Dummer and Ifenthaler (2011). 
 
-This package is based on the code I wrote to analyze data for my Master's thesis. I arrange the code in a package so that other people who are doing similar studies can use the package to analyze data conveniently and put the KS research forward. The name of the package is inspired by my cats, Cookie (the grey-strip one in the figure below) and Milk (the black one in the figure below).
+The code was initially written for a specific analysis purpose when I was working on my Master's thesis. Although I reorganized the code to make it flexible for use in different analysis plans, the package has not been fully validated, and some errors may occur. Please feel free to contact me via [weiziqianpsych@outlook.com](weiziqianpsych@outlook.com) to report any issues and help me improving the package and this tutorial website!
+
+The name of the package is inspired by my cats, Cookie (the grey-strip one in the figure below) and Milk (the black one in the figure below).
 
 ![img1](/img/logo.svg)
 
@@ -26,7 +28,7 @@ Unix/macOS:
 python3 -m pip install --upgrade cookiemilk
 ```
 
-**NOTE**: As same as many other Python packages, *cookiemilk* works exactly the same on devices with different systems. This means that you can run the example code in this tutorial on either a Windows PC or a Mac. The only different thing is the way to install it.
+**NOTE**: Like many other Python packages, *cookiemilk* functions the same way on devices with different operating systems. This means you can run the example code in this tutorial on either a Windows PC or a Mac. The only difference is the method of installation.
 
 ## 1.3 Import
 ```
@@ -44,8 +46,8 @@ import cookiemilk
 |                  |calc_graphical_matching | calculate the graphical similarity between two graphs     |
 |                  |calc_gcent              | calculate the graphical centrality (GC) of a given graph  |
 |                  |numerical_sim           | calculate the numerical similarity                        |
-|                  |calc_tversky            | calculate the Tversky similarity between two graphs       |
-|Visualization     |draw                    | draw and/or save a graph                                  |
+|                  |calc_tversky            | calculate Tversky's similarity between two graphs       |
+|Visualization     |draw                    | plot and/or save a graph                                  |
 |                  |average_graph           | generate an average graph                                 |
 |Others            |quick_analysis          | conduct data analysis using the above functions           |
 
@@ -59,7 +61,7 @@ import cookiemilk
 `d3.js`: A JavaScript library for manipulating documents based on data
 
 ## 1.6 Citation
-To cite the `cookiemilk` package in publications use:
+To cite *cookiemilk* in publications use:
 
 Wei, Z. (2023). *cookiemilk: An easy-to-use Python package to process knowledge structure data automatically*. South China Normal University, Guangzhou, China. Python package, [https://pypi.org/project/cookiemilk/](https://pypi.org/project/cookiemilk/).
 
