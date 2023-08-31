@@ -197,7 +197,7 @@ First, open the website [http://wordvec.colorado.edu](http://wordvec.colorado.ed
 
 we can click "Matrix Comparison" and then select arguments, input key-terms (I used the example key-terms in "Part 2 A quick start") and submit. The similarity matrix will be presented.
 
-![img1](/lsa.png)
+![img1](/img/lsa.png)
 
 We can then save each matrix in seperate .prx file and use the following code to convert them into PFNets.
 
@@ -250,4 +250,4 @@ cookiemilk.draw(graph=bees_bert, show=False, save=True, filename="fig_bert")
 
 And here are the visualized models. Because we used different corpora in different approaches, these models cannot be compared directly. However, the examples show that word-embedding models are more concise and possibly can be used as automatically generated expert references.
 
-![img1](/word_embeding_test.png)
+![img1](/img/word_embeding_test.png)
