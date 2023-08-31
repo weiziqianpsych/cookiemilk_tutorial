@@ -191,14 +191,63 @@ Clariana, R. B., Rysavy, M. D., & Taricani, E. (2015). Text signals influence te
 
 ## 3.3 Use word embedding methods to generate expert models
 
-Here I will show you some examples to construt KSs with specific key-terms via word embedding methods and use them as expert models in *cookiemilk*.
+Here I will show you some examples of construting KSs with specific key-terms using word embedding methods.
 
-First, open the website [http://wordvec.colorado.edu](http://wordvec.colorado.edu). You can also find basic information of Latent Semantic Analysis (LSA), word2vec and BERT from the website (these are the three approaches used in the following examples).
+First, open the website [http://wordvec.colorado.edu](http://wordvec.colorado.edu). You can also find basic information and the literature about Latent Semantic Analysis (LSA), word2vec and BERT from the website. These are the three approaches used in the following examples.
 
-we can click "Matrix Comparison", and then select arguments, input key-terms (I used the example key-terms in "Part 2 A quick start") and submit. The similarity matrix will be presented.
+we can click "Matrix Comparison" and then select arguments, input key-terms (I used the example key-terms in "Part 2 A quick start") and submit. The similarity matrix will be presented.
 
+![img1](/lsa.png)
 
+We can then save each matrix in seperate .prx file and use the following code to convert them into PFNets.
 
+```
+import cookiemilk
 
+# the document model
+text = 'Bees make honey to survive. It is their only essential food. If there are 60,000 bees in a hive about one ' \
+       'third of them will be involved in gathering nectar which is then made into honey by the house bees. A small ' \
+       'number of bees work as foragers or searchers. They find a source of nectar, then return to the hive to tell ' \
+       'the other bees where it is. Foragers let the other bees know where the source of the nectar is by performing ' \
+       'a dance which gives information about the direction and the distance the bees will need to fly. During this ' \
+       'dance the bee shakes her abdomen from side to side while running in circles in the shape of a figure 8. The ' \
+       'dance follows the pattern shown on the following diagram. The diagram shows a bee dancing inside the hive on ' \
+       'the vertical face of the honeycomb. If the middle part of the figure 8 points straight up it means that bees ' \
+       'can find the food if they fly straight towards the sun. If the middle part of the figure 8 points to the ' \
+       'right, the food is to the right of the sun. The distance of the food from the hive is indicated by the length ' \
+       'of time that the bee shakes her abdomen. If the food is quite near the bee shakes her abdomen for a short ' \
+       'time. If it is a long way away she shakes her abdomen for a long time. When the bees arrive at the hive ' \
+       'carrying nectar they give this to the house bees. The house bees move the nectar around with their mandibles, ' \
+       'exposing it to the warm dry air of the hive. When it is first gathered the nectar contains sugar and minerals ' \
+       'mixed with about 80% water. After ten to twenty minutes, when much of the excess water has evaporated, ' \
+       'the house bees put the nectar in a cell in the honeycomb where evaporation continues. After three days, ' \
+       'the honey in the cells contains about 20% water. At this stage, the bees cover the cells with lids which they ' \
+       'make out of beeswax. At any one time the bees in a hive usually gather nectar from the same type of blossom ' \
+       'and from the same area. Some of the main sources of nectar are fruit trees, clover and flowering trees. '
+key_terms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
+             'hive', 'shake', 'honey', 'abdomen', 'figure 8', 'minerals',
+             'bees', 'evaporation', 'dry', 'fruit trees']
+bees_text = cookiemilk.text2graph(data=text, key_terms=key_terms, as_lower=True, read_from_file=False)
 
+# the LSA model
+bees_lsa = cookiemilk.cmap2graph(data='/Users/weiziqian/Desktop/test/word_embedding/data/lsa.prx',
+                                 data_type='array', key_terms=key_terms, read_from_file=True, read_from=0,
+                                 pfnet=True, max=1.1, min=0.1)
+bees_w2v = cookiemilk.cmap2graph(data='/Users/weiziqian/Desktop/test/word_embedding/data/w2v.prx',
+                                 data_type='array', key_terms=key_terms, read_from_file=True, read_from=0,
+                                 pfnet=True, max=1.1, min=0.1)
+bees_bert = cookiemilk.cmap2graph(data='/Users/weiziqian/Desktop/test/word_embedding/data/bert.prx',
+                                  data_type='array', key_terms=key_terms, read_from_file=True, read_from=0,
+                                  pfnet=True, max=1.1, min=0.1)
 
+# save visualized graphs
+cookiemilk.draw(graph=bees_text, show=False, save=True, filename="fig_text")
+cookiemilk.draw(graph=bees_lsa, show=False, save=True, filename="fig_lsa")
+cookiemilk.draw(graph=bees_w2v, show=False, save=True, filename="fig_w2v")
+cookiemilk.draw(graph=bees_bert, show=False, save=True, filename="fig_bert")
+
+```
+
+And here are the visualized models. Because we used different corpora in different approaches, these models cannot be compared directly. However, the examples show that word-embedding models are more concise and possibly can be used as automatically generated expert references.
+
+![img1](/word_embeding_test.png)
