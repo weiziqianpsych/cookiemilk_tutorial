@@ -189,7 +189,7 @@ Clariana, R. B., & Koul, R. (2004). A computer-based approach for translating te
 
 Clariana, R. B., Rysavy, M. D., & Taricani, E. (2015). Text signals influence team artifacts. *Educational Technology Research and Development*, *63*(1), 35-52.
 
-## 3.3 Use word embedding methods to generate expert models
+## 3.3 Generate expert models via word embedding methods
 
 Here I will show you some examples of construting KSs with specific key-terms using word embedding methods.
 
