@@ -162,7 +162,7 @@ key_terms = ['beeswax', 'sun', 'nectar', 'house bees', 'water', 'distance',
 bees_text = cookiemilk.text2graph(data=text, key_terms=key_terms, as_lower=True, read_from_file=False)
 ```
 
-## 2.2 Step 2 Do some calculations
+## 2.2 Step 2 Graph-based features calculation
 
 For example, we can calculate the propositional similarity between `bees_text` and `bees_student` mentioned above by using the function `calc_tversky`.
 
