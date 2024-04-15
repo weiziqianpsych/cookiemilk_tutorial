@@ -195,7 +195,7 @@ print(my_result)
 The result is 0.67.
 
 ### calc_gcent()
-`calc_gcent(G, detailed=False)`
+`calc_gcent(G)`
 
 #### Description  
 Calculate the Graph Centrality (GC) of a graph.
@@ -207,10 +207,8 @@ Clariana, R. B., Rysavy, M. D., & Taricani, E. (2015). Text signals influence te
 #### Arguments
 ``G``: a NeyworkX df_graphs.
 
-``detailed``: show detailed information of calculation or not. Default is False.
-
 #### Value
-A number of gcent. And if you set `detailed=True`, additional information will be shown in the console.
+A number of gcent.
 
 #### Examples
 ```
@@ -221,21 +219,10 @@ my_cmap1 = [['A', 'B'], ['A', 'C'], ['A', 'D'], ['B', 'C']]
 my_data1 = cookiemilk.cmap2graph(data=my_cmap1, data_type='pair', read_from_file=False)
 
 # calculation
-my_result = cookiemilk.calc_gcent(my_data1, detailed=True)
+my_result = cookiemilk.calc_gcent(my_data1)
 ```
 
 The result shows that the gcent of this graph is 0.67.
-```
-adjacency matrix:
- [[0. 1. 1. 1.]
- [1. 0. 1. 0.]
- [1. 1. 0. 0.]
- [1. 0. 0. 0.]]
-n: 4
-node_degree: [3. 2. 2. 1.]
-ncent: [1.         0.66666667 0.66666667 0.33333333]
-gcent: 0.6666666666666667
-```
 
 ### numerical_sim()
 `numerical_sim(value1, value2)`
@@ -274,7 +261,7 @@ print(cookiemilk.numerical_sim(my_result1, my_result2))
 The result is 0.50.
 
 ### calc_tversky()
-`calc_tversky(graph1, graph2, comparison, alpha=0.5, detailed=False)`
+`calc_tversky(graph1, graph2, comparison, alpha=0.5)`
 
 #### Description  
 Calculate Tversky's similarity between two graphs, including conceptual, propositional and semantic similarity.
@@ -297,8 +284,6 @@ Clariana, R. B., Wallace, P. E., & Godshalk, V. M. (2009). Deriving and measurin
 `comparison`: a string from ['concept', 'propositional', 'semantic'] specifying which types of similarities to calculate.
 
 `alpha`: the parameter "alpha" in the Tversky's similarity.
-
-`detailed`: show detailed information of calculation or not. Default is False.
 
 #### Value
 A number of Tversky's similarity.
@@ -331,7 +316,7 @@ The similarity is 1.0, 0.57 and 0.57, respectively.
 
 ### draw()
 
-`draw(graph, show=True, save=False, filename='filename', encoding='utf-8', canvas_size=(500, 500), node_font='sans-serif', node_fontsize=12, node_fontcolor='black', node_fillcolor='lightgrey', node_size=12, edge_color='#7ab8cc', edge_size=2, edge_distance=100, charge=-300, detailed=True)`
+`draw(graph, show=True, save=False, filename='filename', encoding='utf-8', canvas_size=(500, 500), node_font='sans-serif', node_fontsize=12, node_fontcolor='black', node_fillcolor='lightgrey', node_size=12, edge_color='#7ab8cc', edge_size=2, edge_distance=100, charge=-300)`
 
 #### Description    
 Show and/or save a NetworkX Graph.
@@ -370,8 +355,6 @@ Based on d3.js (https://d3js.org/) and pywebview (https://github.com/r0x0r/pyweb
 
 `charge`: a number specifying the charge in the df_graphs. The default is -300.
 
-`detailed`: A boolean, the default value is True. If detailed=True, there will be a printed message shown if the HTML file is saved successfully.
-
 #### Value
 None.
 
@@ -395,7 +378,7 @@ Result:
 
 ### average_graph()
 
-`average_graph(data, keyterms, pfnet=True, max=1, min=0.1, r=np.inf, n_core=None, detailed=True)`
+`average_graph(data, keyterms, pfnet=True, max=1, min=0.1, r=np.inf, n_core=None)`
 
 #### Description    
 Generate an average graph based on several graphs.
@@ -415,8 +398,6 @@ Generate an average graph based on several graphs.
 `r`: A number used when calculating a PFNet. Considering that the mental perception of concept relation is in the ordinal scale, the default value of `r` is infinity (i.e., np.inf). Please see "Schvaneveldt, R. W., Durso, F. T., & Dearhold, D. W. (1989). Network structures in proximity data. Psychology of Learning and Motivation, 24, 249-284".
 
 `n_core`: An integer specifying the number of nodes with the highest node centrality keep in the average graph. The default value is None, representing that all key-terms and links will be kept.
-
-`detailed`: A boolean, the default value is True. If detailed=True, there will be a printed message shown an average graph is generated successfully.
 
 #### Value
 A NetworkX graph of the average network.
