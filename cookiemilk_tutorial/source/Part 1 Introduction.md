@@ -63,17 +63,4 @@ import cookiemilk
 ## 1.6 Citation
 To cite *cookiemilk* in publications use:
 
-Wei, Z. (2023). *cookiemilk: An easy-to-use Python package to process knowledge structure data automatically*. South China Normal University, Guangzhou, China. Python package, [https://pypi.org/project/cookiemilk/](https://pypi.org/project/cookiemilk/).
-
-BibTeX:
-```
-@Manual{,
-    title = {cookiemilk: An easy-to-use Python package to process knowledge structure data automatically},
-    author = {Wei, Ziqian},
-    organization = {South China Normal University},
-    address = {Guangzhou, China},
-    year = {2023},
-    note = {Python package},
-    url = {https://pypi.org/project/cookiemilk/},
-}
-```
+Wei, Z., Zhang, Y., Clariana, R. B., & Chen, X. (2024). The effects of reading prompts and post-reading generative learning tasks on multiple document integration: Evidence from concept network analysis. Educational Technology Research and Development, 72, 661–685. [https://doi.org/10.1007/s11423-023-10326-w](https://doi.org/10.1007/s11423-023-10326-w)
